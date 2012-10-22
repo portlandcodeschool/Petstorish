@@ -10,8 +10,11 @@ class OrdersController < ApplicationController
 
   def show
   end
+
   def index
+    @orders = Order.all
   end
+
   def edit
   end
   def show
@@ -22,7 +25,7 @@ class OrdersController < ApplicationController
   end
   def new
   end
-  def create  
+  def create
   end
 
 end

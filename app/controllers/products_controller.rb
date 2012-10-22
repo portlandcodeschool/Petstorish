@@ -8,10 +8,11 @@ class ProductsController < ApplicationController
 
   end
 
-  def show
-  end
+
   def index
+    @products = Product.all
   end
+
   def edit
   end
   def show
@@ -22,7 +23,7 @@ class ProductsController < ApplicationController
   end
   def new
   end
-  def create  
+  def create
   end
 
 end

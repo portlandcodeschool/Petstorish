@@ -10,7 +10,7 @@ describe "Go to category list" do
   end
 end
 
-describe "Products controller" do  
+describe "Products controller" do
   it "displays a product" do
     {:get => "/products/9"}.should route_to(
       controller: "products",
