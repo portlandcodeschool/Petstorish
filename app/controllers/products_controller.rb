@@ -26,7 +26,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.save
+    @product = Product.find(params[:id])
+    @product.save
     redirect_to @product
     # redirect_to :controller => :products, :action => :show
   end
