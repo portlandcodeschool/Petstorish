@@ -21,9 +21,14 @@ class ProductsController < ApplicationController
   end
   def delete
   end
+
   def new
   end
+
   def create
+    @product = Product.save
+    redirect_to @product
+    # redirect_to :controller => :products, :action => :show
   end
 
 end

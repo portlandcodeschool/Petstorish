@@ -10,14 +10,3 @@ describe OrdersController do
     end
   end
 end
-
-describe ProductsController do
-  describe "GET index" do
-    it "assigns all products to @products" do
-      product = double("steve")
-      Product.stub(:all) { product }
-      get :index
-      assigns(:products).should eq(product)
-    end
-  end
-end
