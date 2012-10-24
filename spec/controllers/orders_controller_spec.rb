@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe OrdersController do
 
-  describe 'viewing all orders' do
+  # INDEX
+  describe "GET orders" do
+    it "should " do
 
+    end
   end
 end
