@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new
-
     @product.save
     flash[:notice] = "SUPER DUPER success"
     redirect_to @product

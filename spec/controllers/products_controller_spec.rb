@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe ProductsController do
   let(:products) { [mock("product1"), mock("product2")] }
-  let(:product) { mock_model(Product, :update_attributes => false)}
-  
-   
+  let(:product) { mock_model(Product)}
+
   describe "GET index" do
     it "assigns all products to @products" do
       Product.should_receive(:all).and_return(products)
@@ -59,7 +58,7 @@ describe ProductsController do
         post :create
         flash[:notice].should_not be_blank
 
-      end
+     end
         
     end
 
