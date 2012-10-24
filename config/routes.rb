@@ -13,7 +13,7 @@ Petstorish::Application.routes.draw do
   match '/:category/s/:query' => 'product#search'
 
   resources :products
-
+  resources :users
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
