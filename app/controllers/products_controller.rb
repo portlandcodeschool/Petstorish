@@ -16,6 +16,8 @@ class ProductsController < ApplicationController
   def edit
   end
   def show
+    @product = Product.find(params[:id]) 
+  
   end
   def update
   end
@@ -23,11 +25,17 @@ class ProductsController < ApplicationController
   end
 
   def new
+
+    @product = Product.new
   end
 
   def create
-    @product = Product.save
+    @product = Product.new
+
+    @product.save
+    flash[:notice] = "SUPER DUPER success"
     redirect_to @product
+
     # redirect_to :controller => :products, :action => :show
   end
 
