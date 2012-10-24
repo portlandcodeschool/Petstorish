@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem 'rb-fsevent'
+gem 'devise'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'guard-rspec'
