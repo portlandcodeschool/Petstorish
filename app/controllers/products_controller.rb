@@ -1,27 +1,19 @@
 class ProductsController < ApplicationController
 
   def list
-      
+
   end
 
   def search
 
   end
 
-
   def index
     @products = Product.all
   end
 
-  def edit
-  end
   def show
     @product = Product.find(params[:id])
-
-  end
-  def update
-  end
-  def delete
   end
 
   def new
@@ -30,11 +22,25 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new
-    @product.save
-    flash[:notice] = "SUPER DUPER success"
-    redirect_to @product
+    if @product.save
+      flash[:notice] = "SUPER DUPER success"
+      redirect_to @product
+    else
+      flash[:notice] = "Oops, there was a problem - please try again."
+      redirect_to :action => "new"
+    end
+  end
 
-    # redirect_to :controller => :products, :action => :show
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  def delete
+
   end
 
 end
