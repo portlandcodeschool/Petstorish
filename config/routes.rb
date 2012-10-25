@@ -6,7 +6,7 @@ Petstorish::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-
+  resources :products
   resources :orders
   match '/:category' => 'products#list'
 
@@ -14,7 +14,6 @@ Petstorish::Application.routes.draw do
   match '/s/:query' => 'product#search'
   match '/:category/s/:query' => 'product#search'
 
-  resources :products
   resources :users
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
