@@ -44,3 +44,4 @@ end
 # gem 'debugger'
 
 gem 'haml-rails'
+gem 'paperclip'

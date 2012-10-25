@@ -32,6 +32,7 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.1.0.0)
     builder (3.0.4)
+    cocaine (0.4.0)
     coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -91,6 +92,12 @@ GEM
     nested_form (0.2.3)
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
+    paperclip (3.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.4.0)
+      mime-types
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -185,6 +192,7 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   jquery-rails
+  paperclip
   rails (= 3.2.8)
   rails_admin
   rb-fsevent

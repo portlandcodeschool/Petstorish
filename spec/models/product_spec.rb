@@ -1,14 +1,20 @@
 require 'spec_helper'
 
 describe Product do
+  let(:product) { Product.new }
+
   it 'has a name field' do
-    product = Product.new
+    # product = Product.new
     product.name.should be_nil
   end
- 
+
+  it "has an image field" do
+    product.image.should be_nil
+  end
+
   context "validating presence of fields" do
 
-    before(:each) do 
+    before(:each) do
       @valid_attributes = {
         :description => "Get yours now!",
         :name => "Steve",
@@ -24,7 +30,7 @@ describe Product do
       @product.should be_valid
     end
 
-    
+
     it 'should have a description' do
       @product.attributes = @valid_attributes.except(:description)
       @product.should_not be_valid
@@ -43,7 +49,7 @@ describe Product do
     it 'should not have a turtle field' do
       @product = Product.new
       expect { product.turtle }.to raise_error
-    end 
-  
+    end
+
   end
 end
