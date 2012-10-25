@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new
+    @product = Product.create(params[:product])
     if @product.save
       flash[:notice] = "SUPER DUPER success"
       redirect_to @product
