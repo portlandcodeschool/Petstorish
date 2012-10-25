@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   end
 
   def delete
-
+    @product = Product.find(params[:id])
   end
 
 end

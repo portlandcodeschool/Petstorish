@@ -20,15 +20,7 @@ require 'spec_helper'
 
 describe OptionsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Option. As you add validations to Option, be sure to
-  # update the return value of this method accordingly.
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # OptionsController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
+
 
   describe "GET index" do
 
@@ -74,10 +66,10 @@ describe OptionsController do
 
       before(:each) do
         @option = mock_model(Option)
-        Option.stub(:new).and_return(@option)
         @option.stub(:update_attributes).and_return(true)
         @option.stub(:save).and_return(true)
-      end
+        Option.stub(:new).and_return(@option)
+       end
 
       it "creates a new Option" do
         Option.should_receive(:new).and_return(@option)
@@ -90,7 +82,8 @@ describe OptionsController do
       end
 
       it "assigns a newly created option as @option" do
-        #????
+        post :create
+        assigns(:option).should eq @option
       end
 
       it "redirects to the created option" do
@@ -100,10 +93,23 @@ describe OptionsController do
     end #describe "with valid...
 
     describe "with invalid params" do
+
+      before(:each) do
+        @option = mock_model(Option)
+        @option.stub(:update_attributes).and_return(false)
+        @option.stub(:save).and_return(false)
+        Option.stub(:new).and_return(@option)
+       end
+
       it "assigns a newly created but unsaved option as @option" do
+        @option.should_receive(:save)
+        post :create
+        assigns(:option).should eq @option
       end
 
       it "re-renders the 'new' template" do
+        post :create
+        response.should render_template('options/new')
       end
     end #describe "with invalid...
   end #describe "POST create"...
@@ -111,19 +117,39 @@ describe OptionsController do
   describe "PUT update" do
     describe "with valid params" do
 
+      before(:each) do
+        @option = mock_model(Option)
+        Option.stub(:find).and_return(@option)
+        @option.stub(:update_attributes).and_return(true)
+      end
+
       it "updates the requested option" do
+        @option.should_receive(:update_attributes)
+        post :update, :id => @option.id
      end
 
       it "assigns the requested option as @option" do
+        post :update, :id => @option.id
+        assigns(:option).should eq @option
      end
 
       it "redirects to the option" do
+        post :update, :id => @option.id
+        response.should redirect_to(@option)
      end
     end #describe "with valid...
 
     describe "with invalid params" do
 
+      before(:each) do
+        @option = mock_model(Option)
+        Option.stub(:find).and_return(@option)
+        @option.stub(:update_attributes).and_return(false)
+      end
+
       it "re-renders the 'edit' template" do
+        post :update, :id => @option.id
+        response.should render_template('options/edit')
      end
     end #describe "with invalid...
   end #describe "PUT update...
