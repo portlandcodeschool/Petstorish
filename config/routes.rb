@@ -1,4 +1,6 @@
 Petstorish::Application.routes.draw do
+  resources :options
+
   devise_for :users
 
   # The priority is based upon order of creation:

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Class:
+  = @option.class
+%p
+  %b Value:
+  = @option.value
+%p
+  %b Product:
+  = @option.product_id
+
+= link_to 'Edit', edit_option_path(@option)
+\|
+= link_to 'Back', options_path

@@ -1,0 +1,23 @@
+%h1 Listing options
+
+%table
+  %tr
+    %th Class
+    %th Value
+    %th Product
+    %th
+    %th
+    %th
+
+  - @options.each do |option|
+    %tr
+      %td= option.class
+      %td= option.value
+      %td= option.product_id
+      %td= link_to 'Show', option
+      %td= link_to 'Edit', edit_option_path(option)
+      %td= link_to 'Destroy', option, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Option', new_option_path

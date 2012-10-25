@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def list
-
+      
   end
 
   def search
