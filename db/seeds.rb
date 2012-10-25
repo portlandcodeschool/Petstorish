@@ -36,4 +36,6 @@ Product.create(
   description: 'Description of Steve',
   price: 12.99
 )
+Option.create(family: 'color', value: 'blue', product_id: '1')
+Option.create(family: 'color', value: 'yellow', product_id: '1')
 

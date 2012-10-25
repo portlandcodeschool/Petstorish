@@ -11,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025190514) do
+ActiveRecord::Schema.define(:version => 20121025212235) do
 
   create_table "options", :force => true do |t|
-    t.string   "class"
+    t.string   "family"
     t.string   "value"
     t.integer  "product_id"
     t.datetime "created_at", :null => false

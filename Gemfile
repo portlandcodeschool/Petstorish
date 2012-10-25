@@ -26,7 +26,7 @@ gem 'devise'
 gem 'rails_admin'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
-  gem 'guard-rspec'
+  gem "capybara"
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
