@@ -17,6 +17,9 @@
     = f.label :Price
     = f.number_field :price
   .field
+    = f.label :Category
+    = f.select(:category, Product.categories)
+  .field
     = f.label :Image
     = f.file_field :image
   .actions
