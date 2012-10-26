@@ -8,6 +8,6 @@ class Product < ActiveRecord::Base
     :format => { :with => /^(\d+)?\.?\d?\d?$/ }
 
   def self.categories 
-    %w[one two pets]
+    %w[pets toys food hats garments misc.]
   end
 end

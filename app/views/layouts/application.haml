@@ -1,0 +1,27 @@
+!!!5
+%html
+  %head
+    %title Petstorish
+    = stylesheet_link_tag    "bootstrap" 
+    = stylesheet_link_tag    "application", :media => "all" 
+    = javascript_include_tag "application" 
+    = csrf_meta_tags 
+  
+%body
+  .container
+    .row
+      .span11
+        .header.clearfix
+          .title
+            Petstore...ish
+          .cart
+            %a{:href => '#'} Shopping Cart
+    .row
+      .span2.sidebar
+        %ul
+          -Product.categories.each do |cat|
+            %a{:href => '#'}
+              %li= cat
+
+      .span9.main
+        = yield

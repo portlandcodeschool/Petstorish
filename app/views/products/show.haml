@@ -1,23 +1,26 @@
-:javascript
-  var viewShow = true;
-  function toggleView(){
-    
-    $.ajax({
+.product-show
+  .attribute
+    .field 
+      Product
+    .value
+      =@product.name
 
-      url: '/products/1/edit',
-      type: 'GET',
-      success: function(response, textStatus, jqXHR){
-              console.log("Hooray, it worked!");
-              $('.holder').html(response);
-              }
-     });
+  .attribute
+    .field 
+      Price 
+    .value
+      =@product.price
 
-     $('.holder').html("fetching form.");
-  }
+  .attribute
+    .field 
+      Description
+    .value
+      =@product.description
 
-.holder  
-  %p= @product.name
-  %p= @product.description
-  %p= @product.price
-  %p= @product.category
-%a{:onclick => 'toggleView()'} Edit
+  .attribute
+    .field 
+      Image 
+    .value
+      %img{:src => @product.image}
+  .link
+    %a{:href => edit_product_path(@product)} Edit Product

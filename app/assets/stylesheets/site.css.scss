@@ -1,0 +1,71 @@
+a
+{
+  text-decoration: none;
+  font-size: 2em;
+  color: blue;
+  background-color: yellow;
+}
+.header
+{
+  background-color: #8899FF;
+  position: relative;
+  padding-top: 3em;
+
+  .title
+  {
+    font-size: 300%;
+    font-weight: bold;
+    float: left;
+    line-height: 0em;
+  }
+
+  .cart
+  {
+    float: right;
+  }
+  
+}
+
+.product-show
+{
+  .attribute
+  {
+    margin-top:1em;
+
+    .field
+    {
+      border-bottom: 1px solid #AAAAAA;
+      color: #333333;
+    }
+
+    .value
+    {
+      font-size: 1.2em;
+      line-height: 1em;
+    }
+  }
+  .link
+  {
+    margin-top:1em;
+  }
+
+
+}
+.sidebar
+{
+  background-color: #DDDDDD;
+  border: solid 1px #AAAAAA;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  padding-left: 0.2em;
+  padding-right: 1em;
+
+  ul
+  {
+    list-style-type: none;
+    li
+    {
+      margin-top: 1em;
+    }
+  }
+}
