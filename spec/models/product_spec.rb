@@ -9,7 +9,7 @@ describe Product do
   end
 
   it "has an image field" do
-    product.image.should be_nil
+    product.image.should_not be_nil
   end
 
   context "validating presence of fields" do
