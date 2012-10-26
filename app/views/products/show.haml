@@ -1,1 +1,23 @@
-hi
+:javascript
+  var viewShow = true;
+  function toggleView(){
+    
+    $.ajax({
+
+      url: '/products/1/edit',
+      type: 'GET',
+      success: function(response, textStatus, jqXHR){
+              console.log("Hooray, it worked!");
+              $('.holder').html(response);
+              }
+     });
+
+     $('.holder').html("fetching form.");
+  }
+
+.holder  
+  %p= @product.name
+  %p= @product.description
+  %p= @product.price
+  %p= @product.category
+%a{:onclick => 'toggleView()'} Edit

@@ -18,7 +18,7 @@ describe Product do
       @valid_attributes = {
         :description => "Get yours now!",
         :name => "Steve",
-        :price => "1 million dollars",
+        :price => 1000.20,
         :category => "Family of Steves"
       }
       @product = Product.create
@@ -61,4 +61,73 @@ describe Product do
     end
 
   end
+
+  context "checking validity of fields" do
+    
+    it "does not allow non-positive numbers" do
+
+      @invalid_attributes= {
+        :description => "Get yours now!",
+        :name => "Steve",
+        :price => -13,
+        :category => "Family of Steves"
+      }
+      @product = Product.create
+
+      @product.attributes = @invalid_attributes
+      
+      @product.should_not be_valid
+      @product.price = 0
+      @product.should_not be_valid
+
+      @product.price = 12
+      @product.should be_valid
+    end
+
+    it "does not allow more than two decimal places" do
+
+      @invalid_attributes= {
+        :description => "Get yours now!",
+        :name => "Steve",
+        :price => 13.523,
+        :category => "Family of Steves"
+      }
+      @product = Product.create
+
+      @product.attributes = @invalid_attributes
+      @product.should_not be_valid
+      
+      @product.price = 13.52
+      @product.should be_valid
+
+      @product.price = 12.2
+      @product.should be_valid
+
+    end
+
+
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end

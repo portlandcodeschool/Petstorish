@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025235450) do
+ActiveRecord::Schema.define(:version => 20121026203742) do
 
   create_table "options", :force => true do |t|
     t.string   "family"
@@ -29,16 +29,16 @@ ActiveRecord::Schema.define(:version => 20121025235450) do
   end
 
   create_table "products", :force => true do |t|
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "name"
     t.text     "description"
-    t.float    "price"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "category"
+    t.decimal  "price",              :precision => 5, :scale => 2
   end
 
   create_table "rails_admin_histories", :force => true do |t|

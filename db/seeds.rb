@@ -9,33 +9,45 @@
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Product.create(
   name: 'steve',
   description: 'Description of Steve',
-  price: 12.99
+  price: 12.99,
+  category: 'Category of Steve'
 )
+
 Option.create(family: 'color', value: 'blue', product_id: '1')
 Option.create(family: 'color', value: 'yellow', product_id: '1')
 
