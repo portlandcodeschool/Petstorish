@@ -32,11 +32,18 @@ class ProductsController < ApplicationController
   end
 
   def edit
-
+    @product = Product.find(params[:id])
   end
 
   def update
-
+    @product = Product.find(params[:id])
+    if @product.update_attributes(params[:product])
+      flash[:notice] = "SUPER DUPER success"
+      redirect_to @product
+    else
+      flash[:notice] = "Oops, there was a problem - please try again."
+      render :action => :edit
+    end
   end
 
   def delete

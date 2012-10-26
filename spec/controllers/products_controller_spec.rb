@@ -17,7 +17,7 @@ describe ProductsController do
       response.should render_template('products/index')
     end
 
-  end
+  end #GET index
 
   describe "GET products/:id" do
 
@@ -56,7 +56,7 @@ describe ProductsController do
       controller.params[:controller].should eq "products"
     end
 
-  end
+  end #GET new
 
   describe "POST create" do
     let(:product) { mock_model(Product).as_new_record }
@@ -93,7 +93,7 @@ describe ProductsController do
 
      end
 
-    end
+    end # successful save
 
     context "failure to save" do
 
@@ -111,8 +111,72 @@ describe ProductsController do
         flash[:notice].should match('problem')
       end
 
-    end
+    end #failure to save
 
   end #describe "post create"
 
+
+  describe "POST update" do
+    describe "with valid params" do
+
+      before(:each) do
+        @product = mock_model(Product)
+        Product.stub(:find).and_return(@product)
+        @product.stub(:update_attributes).and_return(true)
+      end
+
+      it "updates the requested product" do
+        @product.should_receive(:update_attributes)
+        post :update, :id => @product.id
+     end
+
+      it "assigns the requested product as @option" do
+        post :update, :id => @product.id
+        assigns(:product).should eq @product
+     end
+
+      it "redirects to the product" do
+        post :update, :id => @product.id
+        response.should redirect_to(@product)
+      end
+
+    end #describe "with valid...
+
+    describe "with invalid params" do
+
+      before(:each) do
+        @product = mock_model(Product)
+        Product.stub(:find).and_return(@product)
+        @product.stub(:update_attributes).and_return(false)
+      end
+
+      it "re-renders the 'edit' template" do
+        post :update, :id => @product.id
+        response.should render_template('products/edit')
+      end
+
+      it "posts a sorry flash message" do
+        post :update, :id => @product.id
+        flash[:notice].should match('problem')
+      end
+    end #describe "with invalid...
+  end #describe "POST update...
+
+  describe "GET edit" do
+
+    before(:each) do
+      @product = mock_model(Product)
+      Product.should_receive(:find).and_return(@product)
+    end
+
+    it 'should find and return a product' do
+      get :show, :id => @product.id 
+    end
+
+    it 'should not save the product' do
+      @product.should_not_receive(:save)
+      get :show, :id => @product.id 
+    end
+
+  end 
 end

@@ -18,7 +18,8 @@ describe Product do
       @valid_attributes = {
         :description => "Get yours now!",
         :name => "Steve",
-        :price => "1 million dollars"
+        :price => "1 million dollars",
+        :category => "Family of Steves"
       }
       @product = Product.create
     end
@@ -43,6 +44,14 @@ describe Product do
       @product.attributes = @valid_attributes.except(:price)
       @product.should_not be_valid
       @product.price = 12
+      @product.should be_valid
+    end
+
+
+    it 'should have a category' do
+      @product.attributes = @valid_attributes.except(:category)
+      @product.should_not be_valid
+      @product.category = 12
       @product.should be_valid
     end
 
