@@ -1,4 +1,5 @@
 require 'capybara/rspec'
+require 'spec_helper'
 
 describe "Adding a product" do
 
@@ -26,6 +27,7 @@ describe "Adding a product" do
         attach_file 'product_image', '/Users/rachelsakry/Pictures/d-cat2.jpg'
         click_button 'Save'
         current_path.should match(/\/products\/new$/)
+        page.should have_content "error"
     end
 
   end

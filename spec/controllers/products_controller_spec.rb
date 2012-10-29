@@ -108,7 +108,7 @@ describe ProductsController do
 
       it "displays a sad flash message" do
         post :create
-        flash[:notice].should match('problem')
+        flash[:errors].should_not be_nil
       end
 
     end
