@@ -2,7 +2,6 @@
 %html
   %head
     %title Petstorish
-    = stylesheet_link_tag    "bootstrap" 
     = stylesheet_link_tag    "application", :media => "all" 
     = javascript_include_tag "application" 
     = csrf_meta_tags 
@@ -10,18 +9,18 @@
 %body
   .container
     .row
-      .span11
+      .span12
         .header.clearfix
           .title
-            Petstore...ish
+            =link_to 'Petstore...ish', products_path
           .cart
             %a{:href => '#'} Shopping Cart
     .row
       .span2.sidebar
         %ul
           -Product.categories.each do |cat|
-            %a{:href => '#'}
-              %li= cat
+            %li
+              =link_to cat, '#'
 
       .span9.main
         = yield
