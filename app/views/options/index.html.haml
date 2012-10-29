@@ -4,7 +4,6 @@
   %tr
     %th Class
     %th Value
-    %th Product
     %th
     %th
     %th
@@ -13,7 +12,6 @@
     %tr
       %td= option.class
       %td= option.value
-      %td= option.product_id
       %td= link_to 'Show', option
       %td= link_to 'Edit', edit_option_path(option)
       %td= link_to 'Destroy', option, method: :delete, data: { confirm: 'Are you sure?' }

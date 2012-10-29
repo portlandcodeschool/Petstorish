@@ -11,12 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026203742) do
+ActiveRecord::Schema.define(:version => 20121029210455) do
+
+  create_table "option_assignments", :force => true do |t|
+    t.integer  "option_id"
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "options", :force => true do |t|
     t.string   "family"
     t.string   "value"
-    t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -190,7 +190,6 @@ describe OptionsController do
   describe "remote_create" do
     before(:each) do
       @option = mock(Option)
-      @option.stub(:product_id).and_return true
       Option.stub(:find).and_return(@option)
       @option.stub(:save)
     end

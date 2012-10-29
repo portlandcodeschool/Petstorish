@@ -1,28 +1,2 @@
--@product.options.each do |option|
 
-  .attribute
-    .field
-      Option
-    .value
-      = option.family + '  :  ' + option.value
-    .value
-      = button_to 'Delete...', options_remote_destroy_path(:option_id => option.id, :product_id => @product.id)
-      
-
-%h2 New Option
-
-=form_for Option.new, :product_id => @product.id, :url => options_remote_create_path do |form|
-
-  .field
-    = form.label 'Family'
-    = form.text_field :family
-  .field
-    = form.label 'Value'
-    = form.text_field :value
-  .field 
-    = form.hidden_field :product_id, :value => @product.id
-  .actions
-    = form.submit 'Create'
-  
- 
 

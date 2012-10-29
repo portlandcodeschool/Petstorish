@@ -5,8 +5,7 @@ describe Option do
     before(:each) do
       @valid_attributes = {
         :family => "color",
-        :value => "aquamarine",
-        :product_id => 19
+        :value => "aquamarine"
       }
     @option = Option.create
     end
@@ -24,9 +23,4 @@ describe Option do
       @option.attributes = @valid_attributes.except(:value)
       @option.should_not be_valid
     end
-    it 'requires a product_id' do
-      @option.attributes = @valid_attributes.except(:product_id)
-      @option.should_not be_valid
-    end
-
 end

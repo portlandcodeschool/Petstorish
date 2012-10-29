@@ -1,8 +1,7 @@
 class Option < ActiveRecord::Base
-  attr_accessible :family, :product_id, :value
-  validates_presence_of :family, :product_id, :value
+  attr_accessible :family, :value, :option_assignments
+  validates_presence_of :family, :value
   
-  belongs_to :product
-
+  has_many :option_assignments
 
 end

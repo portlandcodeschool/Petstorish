@@ -48,7 +48,11 @@ Product.create(
   category: 'Category of Steve'
 )
 
-Option.create(family: 'color', value: 'blue', product_id: 1)
-Option.create(family: 'color', value: 'yellow', product_id: 1)
-Option.create(family: 'color', value: 'green', product_id: 1)
+Option.create(family: 'color', value: 'blue')
+Option.create(family: 'color', value: 'yellow')
+Option.create(family: 'color', value: 'green')
+
+OptionAssignment.create(product_id: 1, option_id: 1)
+OptionAssignment.create(product_id: 1, option_id: 2)
+OptionAssignment.create(product_id: 1, option_id: 3)
 
