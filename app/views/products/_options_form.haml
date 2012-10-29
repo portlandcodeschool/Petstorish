@@ -1,2 +1,6 @@
-
+-@options = Option.all
+-Option.all.each do |option|
+  %p
+    = check_box_tag 'options[]', option.family
+    = option.value
 
