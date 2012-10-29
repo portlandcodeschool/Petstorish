@@ -1,0 +1,26 @@
+.product-show
+  .attribute
+    .field 
+      Product
+    .value
+      =@product.name
+
+  .attribute
+    .field 
+      Price 
+    .value
+      =@product.price
+
+  .attribute
+    .field 
+      Description
+    .value
+      =@product.description
+
+  .attribute
+    .field 
+      Image 
+    .value
+      %img{:src => @product.image}
+  .link
+    %a{:href => edit_product_path(@product)} Edit Product

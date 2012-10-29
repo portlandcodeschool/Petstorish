@@ -1,0 +1,104 @@
+$link: #51B8EF;
+$hover-background: $link;
+$hover-link: #F26813;
+$background: #EDECDD;
+$dark: #2D0C00;
+$light: #EDECDD;
+$medium: #8DA578;
+a
+{
+  color: $link;
+  &:hover
+  {
+    color: $hover-link;
+  }
+
+}
+.container
+{
+  background-color: $medium;
+}
+.header
+{
+  background-color: $dark;
+  position: relative;
+  padding: 1em;
+  padding-top: 3em;
+  
+  .title
+  {
+    font-size: 300%;
+    font-weight: bold;
+    float: left;
+    line-height: 0em;
+    a
+    {
+      color: $light;
+    }
+  }
+
+  .cart
+  {
+    float: right;
+  }
+  
+}
+
+.product-show
+{
+  .attribute
+  {
+    margin-top:1em;
+
+    .field
+    {
+      border-bottom: 1px solid #AAAAAA;
+      color: #333333;
+    }
+
+    .value
+    {
+      font-size: 1.2em;
+      line-height: 1em;
+    }
+  }
+  .link
+  {
+    margin-top:1em;
+  }
+
+
+}
+.sidebar
+{
+  border-right: solid 1px $dark;
+  background: $light;
+  padding-top: 4em;
+  padding-bottom: 4em;
+  padding-left: 0.2em;
+  padding-right: 1em;
+
+  ul
+  {
+    list-style-type: none;
+    li
+    {
+      margin-top: 1em;
+    }
+  }
+  a
+  {
+    font-size: 150%;
+  }
+
+
+}
+.main
+{
+  margin-left:0px;
+  padding-left:2em;
+}
+.wide
+{
+  width: 100%;
+}
