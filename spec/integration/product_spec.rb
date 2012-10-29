@@ -10,7 +10,7 @@ describe "Adding a product" do
         fill_in 'product_description', :with => 'Measures the steves'
         fill_in 'product_price', :with => 131.00
         select('pets', :from => 'product_category')  
-        attach_file 'product_image', '/Users/pk/img.jpg'
+        attach_file('product_image', File.expand_path('test/images/img.jpg'))
         click_button 'Save'
         current_path.should match(/\/products\/\d+$/)
     end
@@ -24,7 +24,7 @@ describe "Adding a product" do
         fill_in 'product_name', :with => ''
         fill_in 'product_description', :with => ''
         fill_in 'product_price', :with => ''
-        attach_file 'product_image', '/Users/pk/img.jpg'
+        attach_file('product_image', File.expand_path('test/images/img.jpg'))
         click_button 'Save'
         current_path.should match(/\/products\/new$/)
     end
