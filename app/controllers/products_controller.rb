@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @option = Option.new
   end
 
   def update
@@ -45,7 +46,7 @@ class ProductsController < ApplicationController
       flash[:notice] = "SUPER DUPER success"
       redirect_to @product
     else
-      flash[:notice] = "Oops, there was a problem - please try again."
+      flash[:errors] = @product.errors.messages
       render :action => :edit
     end
   end

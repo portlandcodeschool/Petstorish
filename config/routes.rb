@@ -9,6 +9,11 @@ Petstorish::Application.routes.draw do
   # first created -> highest priority.
 
   resources :products
+
+  match '/options/remote_destroy' => 'options#remote_destroy', :as => :options_remote_destroy
+
+  match 'options/remote_create' => 'options#remote_create', :as => :options_remote_create
+
   resources :orders
   match '/:category' => 'products#list'
 

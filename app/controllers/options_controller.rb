@@ -46,4 +46,16 @@ class OptionsController < ApplicationController
     @option.destroy
     redirect_to options_url 
   end
+  
+  def remote_destroy
+     option = Option.find(params[:option_id])
+     option.destroy
+     redirect_to edit_product_path(params[:product_id])
+  end
+
+  def remote_create
+    @option = Option.new(params[:option])
+    @option.save
+    redirect_to edit_product_path(params[:option][:product_id])
+  end
 end

@@ -3,6 +3,8 @@ class Product < ActiveRecord::Base
   attr_accessible :name, :description, :price, :image, :category
   has_attached_file :image
 
+  has_many :options
+
   validates :price, 
     :numericality => { :greater_than => 0 },
     :format => { :with => /^(\d+)?\.?\d?\d?$/ }

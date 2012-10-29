@@ -22,5 +22,14 @@
       Image 
     .value
       %img{:src => @product.image}
+  %h2 Associated Options
+  -@product.options.each do |option|
+    .attribute
+      .field
+        Option
+      .value
+        = option.family + '  :  ' + option.value
+
+
   .link
     %a{:href => edit_product_path(@product)} Edit Product
