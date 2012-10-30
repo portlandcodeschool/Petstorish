@@ -10,7 +10,7 @@ describe "Adding a product" do
         fill_in 'product_name', :with => 'Steve-o-meter'
         fill_in 'product_description', :with => 'Measures the steves'
         fill_in 'product_price', :with => 131.00
-        select('pets', :from => 'product_category')  
+        select('pets', :from => 'product_category')
         attach_file('product_image', File.expand_path('test/images/img.jpg'))
         click_button 'Save'
         current_path.should match(/\/products\/\d+$/)
@@ -42,7 +42,7 @@ describe "edit a product" do
       fill_in 'product_name', :with => 'Steve-o-meter'
       fill_in 'product_description', :with => 'Measures the steves'
       fill_in 'product_price', :with => 131.00
-      select('pets', :from => 'product_category')  
+      select('pets', :from => 'product_category')
       attach_file('product_image', File.expand_path('test/images/img.jpg'))
       click_button 'Save'
       current_path.should match('/products/1')
@@ -55,39 +55,34 @@ describe "edit a product" do
       visit '/products/1/edit'
       fill_in 'product_name', :with => ''
       fill_in 'product_description', :with => 'Measures the steves'
-      fill_in 'product_price', :with => '' 
-      select('pets', :from => 'product_category')  
+      fill_in 'product_price', :with => ''
+      select('pets', :from => 'product_category')
       attach_file('product_image', File.expand_path('test/images/img.jpg'))
       click_button 'Save'
       page.should have_content('errors')
-    end 
+    end
   end
 
 
 end
 
+describe "listing a product by category" do
 
+  describe "happy path" do
+    it "displays all products in that category" do
+      pending
+    end
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  describe "sad path" do
+    it "redirects to the index page and displays a flash notice" do
+      Product.stub(:where).and_return([])
+      visit '/'
+      click_link 'pets'
+      current_path.should == '/'
+      page.should have_content("We don't sell that.  Go to walmart.")
+    end
+  end
+end
 
 
