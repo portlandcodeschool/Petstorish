@@ -11,5 +11,10 @@ class Option < ActiveRecord::Base
   def strip_blanks
     self.family = self.family.strip
     self.value = self.value.strip
+    
+  def self.optionData
+    allOptions = Option.all
+    families = allOptions.collect(&:family).uniq.sort
+    return [families, allOptions]
   end
 end
