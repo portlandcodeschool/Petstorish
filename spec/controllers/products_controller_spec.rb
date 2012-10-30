@@ -179,4 +179,45 @@ describe ProductsController do
     end
 
   end
+
+  describe "GET category list" do
+    context "good path" do
+
+      before(:each) do
+        @products = [mock_model(Product), mock_model(Product)]
+        Product.stub(:find_all_by_category).and_return(@products)
+      end
+
+      it "finds the products by category" do
+        Product.should_receive(:find_all_by_category).and_return(@products)
+        get :list, :category => 'pets'
+      end
+
+      it "renders index" do
+        get :list, :category => 'pets'
+        response.should render_template('products/index')
+      end
+    end
+
+    context "bad path" do
+      
+      it "redirects to root" do
+        Product.stub(:find_all_by_category).and_return([])
+        get :list, :category => 'pets'
+        response.should redirect_to :root
+      end
+
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
+
+

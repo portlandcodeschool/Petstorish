@@ -3,6 +3,7 @@ Petstorish::Application.routes.draw do
 
   root :to => 'products#index'
 
+
   resources :options
 
   devise_for :users
@@ -10,17 +11,14 @@ Petstorish::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+
+
   resources :products
 
-  match '/options/remote_destroy' => 'options#remote_destroy', :as => :options_remote_destroy
-
-  match 'options/remote_create' => 'options#remote_create', :as => :options_remote_create
-
   resources :orders
-  match '/:category' => 'products#list'
-
 
   match '/s/:query' => 'product#search'
+  match '/:category' => 'products#list'
   match '/:category/s/:query' => 'product#search'
 
   resources :users
