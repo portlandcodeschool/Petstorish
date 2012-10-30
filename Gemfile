@@ -45,3 +45,4 @@ end
 
 gem 'haml-rails'
 gem 'paperclip'
+gem 'kaminari'

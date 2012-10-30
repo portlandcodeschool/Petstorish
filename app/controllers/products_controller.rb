@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
 
   def list
-
+    @products = Product.find_all_by_category(params[:category])
+    if @products.empty?
+      flash[:notice] = "We don't sell that.  Go to walmart."
+      redirect_to :root
+      return
+    end
+    render 'index'
   end
 
   def search

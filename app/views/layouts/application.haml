@@ -20,7 +20,7 @@
           %ul
             -Product.categories.each do |cat|
               %li
-                =link_to cat, '#'
+                =link_to cat, '/'+cat
 
         .span9.main
           = yield

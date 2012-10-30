@@ -6,48 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
-Product.create(
-  name: 'steve',
-  description: 'Description of Steve',
-  price: 12.99,
-  category: 'Category of Steve'
-)
-
+50.times do 
+  Product.create(
+    name: 'steve',
+    description: 'Description of Steve',
+    price: 12.99,
+    category: 'pets'
+  )
+end
 Option.create(family: 'color', value: 'blue')
 Option.create(family: 'color', value: 'yellow')
 Option.create(family: 'color', value: 'green')
