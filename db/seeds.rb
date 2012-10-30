@@ -6,14 +6,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-50.times do 
-  Product.create(
-    name: 'steve',
-    description: 'Description of Steve',
-    price: 12.99,
-    category: 'pets'
-  )
+Product.create(
+        name: 'Steve E. Wonder',
+        description: 'Life of Steve',
+        price: 2,
+        category: 'misc'
+)
+Product.categories.each do |cat|
+  50.times do 
+    Product.create(
+      name: RandomWord.adjs.next + " " + RandomWord.nouns.next,
+      description: 'Description of Steve',
+      price: 12.99,
+      category: cat
+    )
+  end
 end
+
 Option.create(family: 'color', value: 'blue')
 Option.create(family: 'color', value: 'yellow')
 Option.create(family: 'color', value: 'green')

@@ -102,3 +102,33 @@ a
 {
   width: 100%;
 }
+
+.product-listing
+{
+  border: 1px solid $dark;
+  background-color: $background;
+  margin-top: 1em;
+  padding: 0.5em;
+  .price
+  {
+    font-size: 3em;
+    float:left;
+    line-height: 1em;
+  }
+  .name
+  {
+  }
+  .links
+  {
+    clear:both;
+    text-align:right;
+  }
+}
+
+
+
+
+
+
+
+

@@ -1,21 +1,28 @@
 class ProductsController < ApplicationController
 
   def list
-    @products = Product.find_all_by_category(params[:category])
+    @products = Product.where(:category => params[:category])
+    #@products = Product.order(:id).page params[:page]
     if @products.empty?
       flash[:notice] = "We don't sell that.  Go to walmart."
       redirect_to :root
       return
     end
+    @products = @products.page params[:page]
     render 'index'
   end
 
   def search
-
+    @products = Product.where(['name LIKE :query', :query => params[:query]])
+    if @products.empty?
+      redirect_to :root, :notice => "Sorry. We don't 'seal' that here."
+      return
+    end
+    render 'index'
   end
 
   def index
-    @products = Product.all
+    @products = Product.order(:id).page params[:page]
   end
 
 #  def show
