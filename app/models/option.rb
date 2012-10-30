@@ -5,4 +5,11 @@ class Option < ActiveRecord::Base
   has_many :option_assignments
   has_many :products, :through => :option_assignments
 
+  before_validation :strip_blanks
+
+
+  def strip_blanks
+    self.family = self.family.strip
+    self.value = self.value.strip
+  end
 end
