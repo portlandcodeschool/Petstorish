@@ -24,9 +24,36 @@
       %p
         = check_box_tag 'options[]', option.id, @product.options.include?(option)
         = option.value
-
   .field
     = f.label :Image
     = f.file_field :image
   .actions
     = f.submit 'Save'
+
+= form_tag "Chuck", :id => "optForm" do#optForm
+  = label_tag(:family, "Family:")
+  = text_field_tag(:family)
+  = label_tag(:value, "Value:")
+  = text_field_tag(:value)
+
+%a.btn#optSubmit{ :href => "#", :onClick => "newOption()" }
+  Create!
+
+:javascript
+  function newOption(){
+    myData = $('#optForm').serialize();
+    $.ajax({
+      url: '/options',
+      type: 'post',
+      dataType: 'application/json',
+      data: myData,
+      success: function(response, textStatus, jqXHR) {
+        alert('it worked!');
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        alert('nuuuu!');
+        console.log(arguments);
+      }
+    });
+
+  };

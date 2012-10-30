@@ -21,12 +21,24 @@ class OptionsController < ApplicationController
 
   # POST /options
   def create
-    @option = Option.new(params[:option])
-
-    if @option.save
-      redirect_to @option, notice: 'Option was successfully created.'
-    else
-      render action: "new"
+#    @option = Option.new(params[:option])
+    respond_to do |format| # for ajax call in Product edit page
+      format.json { 
+        @option = Option.new
+        @option.value = params[:value]
+        @option.family = params[:family] 
+        @option.save
+        render :json, @option.to_json
+      }
+    
+      format.html {
+        @option = Option.new(params[:option])
+        if @option.save
+          redirect_to @option, notice: "Option was successfully created."
+        else
+          render action: "new"
+        end
+      }
     end
   end
 
