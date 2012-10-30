@@ -28,7 +28,7 @@ class OptionsController < ApplicationController
         @option.value = params[:value]
         @option.family = params[:family] 
         @option.save
-        render :json, @option.to_json
+        render :json => @option
       }
     
       format.html {

@@ -19,7 +19,7 @@
     = f.label :Category
     = f.select(:category, Product.categories)
 
-  .field
+  .field#optionField
     - Option.all.each do |option|
       %p
         = check_box_tag 'options[]', option.id, @product.options.include?(option)
@@ -36,24 +36,24 @@
   = label_tag(:value, "Value:")
   = text_field_tag(:value)
 
-%a.btn#optSubmit{ :href => "#", :onClick => "newOption()" }
+%a.btn#optSubmit{:onClick => "newOption()" }
   Create!
 
 :javascript
   function newOption(){
-    myData = $('#optForm').serialize();
+    var myData = $('#optForm').serialize();
     $.ajax({
       url: '/options',
       type: 'post',
-      dataType: 'application/json',
+      dataType: 'json',
       data: myData,
       success: function(response, textStatus, jqXHR) {
-        alert('it worked!');
+        var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
+        $('#optionField').append(toAppend);
       },
       error: function(jqXHR, textStatus, errorThrown){
         alert('nuuuu!');
         console.log(arguments);
       }
     });
-
   };
