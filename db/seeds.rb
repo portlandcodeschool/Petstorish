@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Product.create(
+        name: 'Steve E. Wonder',
+        description: 'Life of Steve',
+        price: 2,
+        category: 'misc'
+)
 Product.categories.each do |cat|
   50.times do 
     Product.create(

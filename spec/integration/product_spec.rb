@@ -85,4 +85,18 @@ describe "listing a product by category" do
   end
 end
 
+describe "searching for a product by name" do
 
+  describe "with results" do
+
+    it "displays results" do
+      visit '/'
+      fill_in 'search_box', :with => 'steve'
+      click_button 'search'
+      current_path.should == '/s/steve'
+      page.should have_content "Wonder"
+    end
+
+  end
+
+end
