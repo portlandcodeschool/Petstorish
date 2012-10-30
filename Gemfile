@@ -46,3 +46,5 @@ end
 gem 'haml-rails'
 gem 'paperclip'
 gem 'kaminari'
+gem 'random-word'
+gem 'factory_girl_rails'

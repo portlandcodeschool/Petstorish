@@ -1,12 +1,17 @@
 - @products.each do |product|
 
-  %p= product.id
-  %p= product.name
-  %p= product.description
-  %p= product.price
-  %p= link_to 'Show', product
-  %p= link_to 'Edit', edit_product_path(product)
-  %p= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+  .product-listing
+    .price
+      = product.price
+      %span.name
+        = product.name
+    .links
+      = link_to 'Show', product
+      = link_to 'Edit', edit_product_path(product)
+      = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
+
+= paginate @products
+
 
 %br
 

@@ -6,17 +6,24 @@ describe ProductsController do
 
   describe "GET index" do
 
+    before(:each) do
+      Product.stub(:order).and_return(products)
+      products.stub(:page)
+    end
     it "assigns all products to @products" do
-      Product.should_receive(:all).and_return(products)
+      Product.should_receive(:order).and_return(products)
       get :index
     end
 
     it "should select the products/index template for rendering" do
-      Product.stub(:all).and_return(products)
       get :index
       response.should render_template('products/index')
     end
 
+    it "should paginate the products" do
+      products.should_receive(:page)
+      get :index
+    end
   end #GET index
 
   describe "GET products/:id" do
@@ -185,11 +192,12 @@ describe ProductsController do
 
       before(:each) do
         @products = [mock_model(Product), mock_model(Product)]
-        Product.stub(:find_all_by_category).and_return(@products)
+        @products.stub(:page)
+        Product.stub(:where).and_return(@products)
       end
 
       it "finds the products by category" do
-        Product.should_receive(:find_all_by_category).and_return(@products)
+        Product.should_receive(:where).and_return(@products)
         get :list, :category => 'pets'
       end
 
@@ -197,18 +205,60 @@ describe ProductsController do
         get :list, :category => 'pets'
         response.should render_template('products/index')
       end
+
+      it "paginates the products" do
+        @products.should_receive(:page)
+        get :list, :category => "I LOVE TESTING FIFUN!!!"
+      end
     end
 
     context "bad path" do
       
       it "redirects to root" do
-        Product.stub(:find_all_by_category).and_return([])
+        Product.stub(:where).and_return([])
         get :list, :category => 'pets'
         response.should redirect_to :root
       end
 
     end
   end
+
+  describe "get search" do
+
+    context "non-empty search" do
+
+      before(:each) do
+        @products = [mock(Product)]
+      end
+
+      it "searches the database" do
+        Product.should_receive(:where).and_return(@products)
+        get :search, :query => "where the party at?"
+      end
+
+    end
+
+    context "empty search" do
+
+      before(:each) do
+        Product.should_receive(:where).and_return([])
+      end
+
+      it "displays a sorry message" do
+       get :search, :query => "?DJKLDSF"
+       flash[:notice].should match('Sorry')
+       end
+
+      it "redirects to zombocom" do
+        get :search, :query => "zombo?"
+        response.should redirect_to :root
+      end
+
+    end
+  end
+
+
+
 end
 
 
