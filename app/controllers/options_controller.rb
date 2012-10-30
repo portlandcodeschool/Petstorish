@@ -24,9 +24,9 @@ class OptionsController < ApplicationController
     @option = Option.new(params[:option])
 
     if @option.save
-      redirect_to @option, notice: 'Option was successfully created.' 
+      redirect_to @option, notice: 'Option was successfully created.'
     else
-      render action: "new" 
+      render action: "new"
     end
   end
 
@@ -34,9 +34,9 @@ class OptionsController < ApplicationController
   def update
     @option = Option.find(params[:id])
     if @option.update_attributes(params[:option])
-      redirect_to @option, notice: 'Option was successfully updated.' 
+      redirect_to @option, notice: 'Option was successfully updated.'
     else
-      render action: "edit" 
+      render action: "edit"
     end
   end
 
@@ -44,18 +44,7 @@ class OptionsController < ApplicationController
   def destroy
     @option = Option.find(params[:id])
     @option.destroy
-    redirect_to options_url 
-  end
-  
-  def remote_destroy
-     option = Option.find(params[:option_id])
-     option.destroy
-     redirect_to edit_product_path(params[:product_id])
+    redirect_to options_url
   end
 
-  def remote_create
-    @option = Option.new(params[:option])
-    @option.save
-    redirect_to edit_product_path(params[:option][:product_id])
-  end
 end

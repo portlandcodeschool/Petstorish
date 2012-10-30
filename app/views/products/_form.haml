@@ -22,7 +22,7 @@
   .field
     - Option.all.each do |option|
       %p
-        = check_box_tag 'options[]', option.id, @product.has_option(option.id)
+        = check_box_tag 'options[]', option.id, @product.options.include?(option)
         = option.value
 
   .field

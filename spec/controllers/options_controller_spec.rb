@@ -29,11 +29,11 @@ describe OptionsController do
       Option.should_receive(:all).and_return(@options)
       get :index
     end
-  
+
   end
 
   describe "GET show" do
-    
+
     it "assigns the requested option as @option" do
       @option = mock_model(Option)
       Option.should_receive(:find).and_return(@option)
@@ -43,12 +43,12 @@ describe OptionsController do
   end
 
   describe "GET new" do
-    
+
     it "should create a new Option" do
       Option.should_receive(:new).and_return(mock_model(Option))
       get :new
     end
-  
+
   end
 
   describe "GET edit" do
@@ -168,41 +168,6 @@ describe OptionsController do
     end
   end
 
-  describe "remote_destroy" do
-    before(:each) do
-      @option = mock(Option)
-      @option.stub(:destroy).and_return true
-      Option.stub(:find).and_return(@option)
-    end
-
-    it "finds the option" do
-      Option.should_receive(:find).and_return(@option)
-      post :remote_destroy
-    end
-
-    it "destroys the option" do
-      @option.should_receive(:destroy)
-      post :remote_destroy
-    end
-
-  end
-
-  describe "remote_create" do
-    before(:each) do
-      @option = mock(Option)
-      Option.stub(:find).and_return(@option)
-      @option.stub(:save)
-    end
-
-    it "finds the option" do
-      Option.should_receive(:find).and_return(@option)
-      post :remote_create
-    end
-    it "saves the option" do
-      @option.should_receive(:save)
-      post :remote_create
-    end
-  end
 end
 
 

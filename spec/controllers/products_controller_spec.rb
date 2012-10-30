@@ -157,7 +157,7 @@ describe ProductsController do
 
       it "posts a sorry flash message" do
         post :update, :id => @product.id
-        flash[:notice].should match('problem')
+        flash[:errors].should_not be_nil
       end
     end #describe "with invalid...
   end #describe "POST update...

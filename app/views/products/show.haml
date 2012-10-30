@@ -23,12 +23,12 @@
     .value
       %img{:src => @product.image}
   %h2 Associated Options
-  -@product.option_assignments.each do |oa|
+  -@product.options.each do |option|
     .attribute
       .field
         Option
       .value
-        = oa.option.family + '  :  ' + oa.option.value
+        = option.family + '  :  ' + option.value
 
 
   .link

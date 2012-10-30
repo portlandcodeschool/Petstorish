@@ -43,8 +43,10 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     OptionAssignment.destroy_all(:product_id => @product.id)
-    params[:options].each do |option|
-      OptionAssignment.create(:option_id => option, :product_id => @product.id)
+    if params[:options]
+      params[:options].each do |option|
+        OptionAssignment.create(:option_id => option, :product_id => @product.id)
+      end
     end
     if @product.update_attributes(params[:product])
       flash[:notice] = "SUPER DUPER success"
