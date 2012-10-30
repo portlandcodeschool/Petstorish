@@ -18,6 +18,13 @@
   .field
     = f.label :Category
     = f.select(:category, Product.categories)
+
+  .field
+    - Option.all.each do |option|
+      %p
+        = check_box_tag 'options[]', option.id, @product.has_option(option.id)
+        = option.value
+
   .field
     = f.label :Image
     = f.file_field :image

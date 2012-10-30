@@ -63,7 +63,7 @@ describe Product do
   end
 
   context "checking validity of fields" do
-    
+
     it "does not allow non-positive numbers" do
 
       @invalid_attributes= {
@@ -75,7 +75,7 @@ describe Product do
       @product = Product.create
 
       @product.attributes = @invalid_attributes
-      
+
       @product.should_not be_valid
       @product.price = 0
       @product.should_not be_valid
@@ -96,7 +96,7 @@ describe Product do
 
       @product.attributes = @invalid_attributes
       @product.should_not be_valid
-      
+
       @product.price = 13.52
       @product.should be_valid
 
@@ -105,8 +105,26 @@ describe Product do
 
     end
 
+  describe "Product#has_option" do
+    let (:product) { Product.create(
+      :description => "Get yours now!",
+      :name => "Steve",
+      :price => 1000.20,
+      :category => "Family of Steves") }
+
+    let (:option_assignment) {OptionAssignment.create(
+      :product_id => product.id,
+      :option_id => 1) }
+
+    context "product with options" do
+      it "returns true" do
+        product.has_option(1).should == true
+      end
+    end
 
   end
+
+end
 
 
 

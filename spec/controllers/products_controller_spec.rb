@@ -120,7 +120,7 @@ describe ProductsController do
     describe "with valid params" do
 
       before(:each) do
-        @product = mock_model(Product)
+        @product = mock_model(Product).as_null_object
         Product.stub(:find).and_return(@product)
         @product.stub(:update_attributes).and_return(true)
       end
@@ -145,7 +145,7 @@ describe ProductsController do
     describe "with invalid params" do
 
       before(:each) do
-        @product = mock_model(Product)
+        @product = mock_model(Product).as_null_object
         Product.stub(:find).and_return(@product)
         @product.stub(:update_attributes).and_return(false)
       end
@@ -170,13 +170,13 @@ describe ProductsController do
     end
 
     it 'should find and return a product' do
-      get :show, :id => @product.id 
+      get :show, :id => @product.id
     end
 
     it 'should not save the product' do
       @product.should_not_receive(:save)
-      get :show, :id => @product.id 
+      get :show, :id => @product.id
     end
 
-  end 
+  end
 end

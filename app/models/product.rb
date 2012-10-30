@@ -4,12 +4,23 @@ class Product < ActiveRecord::Base
   has_attached_file :image
 
   has_many :option_assignments
+  accepts_nested_attributes_for :option_assignments
 
-  validates :price, 
+  validates :price,
     :numericality => { :greater_than => 0 },
     :format => { :with => /^(\d+)?\.?\d?\d?$/ }
 
-  def self.categories 
+
+  def build_option_assignments
+    #try this?
+  end
+
+  def has_option option_id
+    OptionAssignment.where(:option_id => option_id, :product_id => self.id).count > 0
+  end
+
+
+  def self.categories
     %w[pets toys food hats garments misc.]
   end
 end
