@@ -200,11 +200,18 @@ describe ProductsController do
     end
 
     context "bad path" do
-      
-      it "redirects to root" do
+      before(:each) do
         Product.stub(:find_all_by_category).and_return([])
+      end
+
+      it "redirects to root" do
         get :list, :category => 'pets'
         response.should redirect_to :root
+      end
+
+      it "sends a flash message" do
+        get :list, :category => 'pets'
+        flash[:notice].should_not be_nil
       end
 
     end
