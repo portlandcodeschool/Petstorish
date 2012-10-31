@@ -213,7 +213,7 @@ describe ProductsController do
     end
 
     context "bad path" do
-      
+
 
       before(:each) do
         Product.stub(:where).and_return([])
@@ -237,6 +237,7 @@ describe ProductsController do
 
       before(:each) do
         @products = [mock(Product)]
+        @products.stub(:page)
       end
 
       it "searches the database" do

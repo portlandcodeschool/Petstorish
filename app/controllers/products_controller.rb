@@ -13,12 +13,14 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.where(['name LIKE :query', :query => params[:query]])
+    @products = Product.where(['name LIKE :query', :query => "%#{params[:query]}%"])
     if @products.empty?
       redirect_to :root, :notice => "Sorry. We don't 'seal' that here."
       return
     end
+    @products = @products.page params[:page]
     render 'index'
+
   end
 
   def index

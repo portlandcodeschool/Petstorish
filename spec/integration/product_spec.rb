@@ -91,9 +91,9 @@ describe "searching for a product by name" do
 
     it "displays results" do
       visit '/'
-      fill_in 'search_box', :with => 'steve'
+      fill_in 'query', :with => 'Steve'
       click_button 'search'
-      current_path.should == '/s/steve'
+      current_path.should == '/s/'
       page.should have_content "Wonder"
     end
 
