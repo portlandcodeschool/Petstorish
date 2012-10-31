@@ -17,7 +17,8 @@ Petstorish::Application.routes.draw do
 
   resources :orders
 
-  match '/s/' => 'products#search'
+  match '/s/' => 'products#adv_search', :via => :post
+  match '/s/:query' => 'products#search', :via => :get
   match '/:category' => 'products#list'
   match '/:category/s/:query' => 'product#search'
 

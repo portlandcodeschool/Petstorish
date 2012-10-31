@@ -270,6 +270,46 @@ describe ProductsController do
 
 end
 
+describe "using advanced search" do
+
+  context "with results" do
+
+    before(:each) do
+      @products = [mock_model(Product)]
+      Product.stub(:where).and_return(@products)
+    end
+
+    describe "without name, without description" do
+    end
+
+    describe "with name, without description" do
+    end
+
+    describe "without name, with description" do
+    end
+
+    describe "with name, with description" do
+    end
+
+    describe "should search database" do
+    end
+
+    describe "should assign results to @products" do
+    end
+
+  end
+
+  context "without results" do
+
+ 
+  end
+
+end
+
+
+
+
+
 
 
 

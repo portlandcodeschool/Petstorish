@@ -14,12 +14,79 @@ class ProductsController < ApplicationController
 
   def search
     @products = Product.where(['name LIKE :query', :query => "%#{params[:query]}%"])
+
     if @products.empty?
       redirect_to :root, :notice => "Sorry. We don't 'seal' that here."
       return
     end
     @products = @products.page params[:page]
     render 'index'
+
+  end
+
+
+  def adv_search
+    name = false
+    description = false
+     
+    params[:options].each do |option|
+      if option == 'name'
+        name = true
+      elsif option == 'description'
+        description = true
+      end
+    end
+
+    if name and description
+      @products = Product.where([
+                          '((name LIKE :query) OR ' +
+                          '(description LIKE :query)) AND ' +
+                          '(price > :minimum) AND ' +
+                          '(price < :maximum)',
+
+                          :query => "%#{params[:query]}%",
+                          :description => "%#{params[:query]}%",
+                          :minimum => params[:price][:minimum],
+                          :maximum => params[:price][:maximum]
+      ])
+
+    elsif name and !description
+      @products = Product.where([
+                          '(name LIKE :query) AND ' +
+                          '(price > :minimum) AND ' +
+                          '(price < :maximum)',
+
+                          :query => "%#{params[:query]}%",
+                          :minimum => params[:price][:minimum],
+                          :maximum => params[:price][:maximum]
+      ])
+
+
+    elsif !name and description
+      @products = Product.where([
+                          '(description LIKE :query) AND ' +
+                          '(price > :minimum) AND ' +
+                          '(price < :maximum)',
+
+                          :query => "%#{params[:query]}%",
+                          :minimum => params[:price][:minimum],
+                          :maximum => params[:price][:maximum]
+      ])
+
+
+    else #!name and !description
+      @products = Product.where([
+                          '(price > :minimum) AND ' +
+                          '(price < :maximum)',
+
+                          :minimum => params[:price][:minimum],
+                          :maximum => params[:price][:maximum]
+      ])
+
+    end
+
+   @products = @products.page params[:page]
+   render 'index'
 
   end
 
