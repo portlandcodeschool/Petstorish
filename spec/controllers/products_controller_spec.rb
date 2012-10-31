@@ -266,47 +266,79 @@ describe ProductsController do
     end
   end
 
+  describe "using advanced search" do
 
+    context "it should set name and description flags accordingly" do
 
-end
+      before(:each) do
+        @products = [mock_model(Product)]
+        Product.stub(:where).and_return(@products)
+        @products.stub(:page)
+        stub(:name=)
+        stub(:description=)
+      end
 
-describe "using advanced search" do
+      it "without name, without description" do
+        post :adv_search, :query => 's', :options => [], :price => {:minimum => 0, :maximum => 100}
+        assigns(:name).should eq false
+        assigns(:description).should eq false
+      end
 
-  context "with results" do
+      it "with name, without description" do
+        post :adv_search, :query => 's', :options =>[:name], :price => {:minimum => 0, :maximum => 100}
+        assigns(:name).should eq false
+        assigns(:description).should eq true
+      end
 
-    before(:each) do
-      @products = [mock_model(Product)]
-      Product.stub(:where).and_return(@products)
+      it "without name, with description" do
+        post :adv_search, :query => 's', :options =>[:description], :price => {:minimum => 0, :maximum => 100}
+        assigns(:name).should eq false
+        assigns(:description).should eq true
+      end
+
+      it "with name, with description" do
+        post :adv_search, :query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}
+        assigns[:name].should eq true
+        assigns(:description).should eq true 
+      end
+
     end
 
-    describe "without name, without description" do
+    context "with results" do
+
+      before(:each) do
+        @products = [mock_model(Product)]
+        Product.stub(:where).and_return(@products)
+        @products.stub(:page)
+        @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}}
+      end
+
+      it "should search database" do
+        Product.should_receive(:where).and_return(@products)
+        post :adv_search, @pars
+      end
+
+      it "should paginate the products" do
+        @products.should_receive(:page)
+        post :adv_search, @pars
+      end
+
+
+      it "should assign results to @products" do
+        post :adv_search, @pars
+        assigns(:products).should eq @products
+      end
+
     end
 
-    describe "with name, without description" do
-    end
+    context "without results" do
 
-    describe "without name, with description" do
-    end
-
-    describe "with name, with description" do
-    end
-
-    describe "should search database" do
-    end
-
-    describe "should assign results to @products" do
+   
     end
 
   end
 
-  context "without results" do
-
- 
-  end
-
 end
-
-
 
 
 

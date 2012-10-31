@@ -26,6 +26,8 @@ class ProductsController < ApplicationController
 
 
   def adv_search
+    # these represent checkbox 
+    # tick states.
     name = false
     description = false
      
@@ -45,7 +47,6 @@ class ProductsController < ApplicationController
                           '(price < :maximum)',
 
                           :query => "%#{params[:query]}%",
-                          :description => "%#{params[:query]}%",
                           :minimum => params[:price][:minimum],
                           :maximum => params[:price][:maximum]
       ])

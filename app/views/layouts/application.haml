@@ -5,33 +5,100 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  :javascript
-    function searchPopUp()
-    {
-
-    }
   %body
-    .overlay
-    .input-overlay
-      .search
-        =form_tag("/s/", :method => "post") do
+    ///////////////////////////////////////////////////////////
+    //  SEARCH OVERLAY
+    //////////////////////////////////////////////////////////
+    #overlay-container
+      :javascript
+        var opacityTimer;
+        var op = 0.0;
+        var overlayDiv = $('#overlay-container');
+        function fadeIn()
+        {
+          if(op> 1)
+          {
+            clearInterval(opacityTimer);
+            overlayDiv.css({opacity: 1});
+          }
+          else
+          {
+            op = op + 0.05;
+            overlayDiv.css({opacity: op});
+            console.log(op)
+          }
 
-          = text_field_tag :query
+        }
+        function fadeOut()
+        {
+          if(op < 0.1)
+          {
+            overlayDiv.css({display: 'none'});
 
-          .checkboxen
-            = check_box_tag 'options[]', 'name', true
-            Name
 
-            = check_box_tag 'options[]', 'description', true
-            Description
+            clearInterval(opacityTimer);
+          }
+          else
+          {
+            op = op - 0.05;
+            overlayDiv.css({opacity: op});
+            console.log(op)
+          }
 
-          .field
+        }
+        function hideOverlay(){
+          clearInterval(opacityTimer);
+          opacityTimer = setInterval(fadeOut,2);
+        }
+        function showOverlay(){
 
-            = select('price', 'minimum', (0..100).step(10))
-            = select('price', 'maximum', (0..100).step(10), :selected => 100)
+          console.log('showOverLay')
+          clearInterval(opacityTimer)
+          overlayDiv.show();
+          $('.input-overlay').css({
+            top:'30%',
+            left:'50%',
+            margin:'-'+($('.input-overlay').height() / 2)+
+            'px 0 0 -'+($('.input-overlay').width() / 2)+'px'
+            });
 
-            .button
-              =submit_tag("search", :id => 'OverlaySearchButton')
+            opacityTimer = setInterval(fadeIn, 2);
+        } 
+
+      .overlay
+      .input-overlay
+        %h2 Search
+        .search
+          =form_tag("/s/", :method => "post") do
+
+            = text_field_tag :query
+
+            .checkboxen
+              search in:
+              %p
+                = check_box_tag 'options[]', 'name', true
+                Name
+
+              %p
+                = check_box_tag 'options[]', 'description', true
+                Description
+
+            .field
+              price:
+              .price
+                minimum
+                %p= select('price', 'minimum', (0..100).step(10))
+              .price
+                maximum
+                %p= select('price', 'maximum', (0..100).step(10), :selected => 100)
+
+              .button
+                =submit_tag("search", :id => 'OverlaySearchButton')
+            .close
+              %a{:href=>'#', :onClick => "hideOverlay();"} close
+      //////////////////////////////////////////////////////////
+      //  HEADER 
+      /////////////////////////////////////////////////////////
 
     .container
       .row
@@ -47,7 +114,7 @@
                   =text_field_tag(:query)
                 .options
                   .link
-                    %a{:onClick => "$('.input-overlay').show(); $('.overlay').show()"} Advanced Search
+                    %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
                   .button
                     =submit_tag("search", :id => 'SearchButton')
       .row
@@ -69,5 +136,3 @@
       window.location = "/s/"+$("#query").val();
       }); 
 
-
-      $('.input-overlay').css({top:'30%',left:'50%',margin:'-'+($('.input-overlay').height() / 2)+'px 0 0 -'+($('.input-overlay').width() / 2)+'px'});
