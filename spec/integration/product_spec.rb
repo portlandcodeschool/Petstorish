@@ -48,12 +48,17 @@ describe "edit a product" do
       current_path.should match('/products/1')
       page.should have_content('Steve-o-meter')
     end
-    it "makes a new option via ajax", :js => true do
-      visit '/products/1/edit'
-      fill_in 'family', :with => "color"
-      fill_in 'value', :with => "emerald"
-      find('#optSubmit').click
-      page.should have_content 'emerald'
+    describe "JS ajax testing" do
+      it "makes a new option via ajax", :js => true do
+        visit '/products/1/edit'
+        fill_in 'family', :with => "color"
+        fill_in 'value', :with => "emerald"
+        find('#optSubmit').click
+        page.should have_content 'emerald'
+      end
+      after(:all) do
+        Option.find_by_value("emerald").destroy
+      end
     end
   end
 
