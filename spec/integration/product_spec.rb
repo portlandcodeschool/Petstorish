@@ -107,3 +107,5 @@ describe "searching for a product by name" do
   end
 
 end
+
+

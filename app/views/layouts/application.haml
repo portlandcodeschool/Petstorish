@@ -5,21 +5,51 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+  :javascript
+    function searchPopUp()
+    {
 
+    }
   %body
+    .overlay
+    .input-overlay
+      .search
+        =form_tag("/s/", :method => "post") do
+
+          = text_field_tag :query
+
+          .checkboxen
+            = check_box_tag 'options[]', 'name', true
+            Name
+
+            = check_box_tag 'options[]', 'description', true
+            Description
+
+          .field
+
+            = select('price', 'minimum', (0..100).step(10))
+            = select('price', 'maximum', (0..100).step(10), :selected => 100)
+
+            .button
+              =submit_tag("search", :id => 'OverlaySearchButton')
+
     .container
       .row
         .span12
           .header.clearfix
             .title
               =link_to 'Petstore...ish', products_path
-            .search
-              =form_tag("/s/", :method => "get") do
-                =label_tag(:query, "Search:")
-                =text_field_tag(:query)
-                =submit_tag("search")
-            .cart
-              %a{:href => '#'} Shopping Cart
+            .right
+              .cart
+                %a{:href => '#'} Shopping Cart
+              .search
+                =form_tag("/s/", :method => "get") do
+                  =text_field_tag(:query)
+                .options
+                  .link
+                    %a{:onClick => "$('.input-overlay').show(); $('.overlay').show()"} Advanced Search
+                  .button
+                    =submit_tag("search", :id => 'SearchButton')
       .row
         .span2.sidebar
           %ul
@@ -32,3 +62,12 @@
             .notice
               %h2= flash[:notice]
           = yield
+
+  :javascript
+    $("#SearchButton").click(function(event) {
+      event.preventDefault();
+      window.location = "/s/"+$("#query").val();
+      }); 
+
+
+      $('.input-overlay').css({top:'30%',left:'50%',margin:'-'+($('.input-overlay').height() / 2)+'px 0 0 -'+($('.input-overlay').width() / 2)+'px'});
