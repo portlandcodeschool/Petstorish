@@ -55,13 +55,18 @@
       dataType: 'json',
       data: myData,
       success: function(response, textStatus, jqXHR) {
-        var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
-        var familySelect = "#" + response.family.toLowerCase() ;
-        if ($(familySelect).length === 0) {
-          $('#optionField').append('<div class="family" id="' + response.family.toLowerCase() + '"><h3>' + response.family + '</h3></div>');
+        console.log(textStatus);
+        if (response.message){
+          alert(response.message);
         }
-        $(familySelect).append(toAppend);
-        
+        else {  
+          var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
+          var familySelect = "#" + response.family.toLowerCase() ;
+          if ($(familySelect).length === 0) {
+            $('#optionField').append('<div class="family" id="' + response.family.toLowerCase() + '"><h3>' + response.family + '</h3></div>');
+          }
+          $(familySelect).append(toAppend);
+        }
       },
       error: function(jqXHR, textStatus, errorThrown){
         alert('nuuuu!');

@@ -27,8 +27,12 @@ class OptionsController < ApplicationController
         @option = Option.new
         @option.value = params[:value].downcase
         @option.family = params[:family].downcase 
-        @option.save
-        render :json => @option
+        @nope = {:message => "Value already exists"}
+        if @option.save
+          render :status => 201, :json => @option
+        else
+          render :status => 200, :json => @nope
+        end
       }
     
       format.html {
