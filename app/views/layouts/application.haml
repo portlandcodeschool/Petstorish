@@ -67,7 +67,9 @@
     $("#SearchButton").click(function(event) {
       event.preventDefault();
       window.location = "/s/"+$("#query").val();
-      }); 
-
-
-      $('.input-overlay').css({top:'30%',left:'50%',margin:'-'+($('.input-overlay').height() / 2)+'px 0 0 -'+($('.input-overlay').width() / 2)+'px'});
+    });
+      $('.input-overlay').css({
+        top:'30%',
+        left:'50%',
+        margin:'-'+($('.input-overlay').height() / 2)+'px 0 0 -'+($('.input-overlay').width() / 2)+'px'
+      });
