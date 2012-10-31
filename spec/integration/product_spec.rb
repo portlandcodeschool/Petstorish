@@ -1,6 +1,16 @@
 require 'capybara/rspec'
 require 'spec_helper'
 
+describe "viewing a product" do
+  it "displays various fields" do
+    visit '/products/1'
+    page.should have_css('div.attribute#product')
+    page.should have_css('div.attribute#category')
+    page.should have_css('div.attribute#price')
+    page.should have_css('div.attribute#description')
+  end
+end
+
 describe "Adding a product" do
 
   context "happy path" do
@@ -82,7 +92,14 @@ describe "listing a product by category" do
 
   describe "happy path" do
     it "displays all products in that category" do
-      pending
+      visit '/'
+      click_link 'pets'
+      current_path.should == '/pets'
+      page.has_css?('div.product-listing')
+      all('div.product-listing').first.click_link('Show')
+      within('#category') do
+        page.should have_content('pets')
+      end
     end
   end
 

@@ -1,35 +1,41 @@
 .product-show
-  .attribute
+  .attribute#product
     .field
       Product
     .value
       =@product.name
 
-  .attribute
+  .attribute#category
+    .field
+      Category
+    .value
+      =@product.category
+  .attribute#price
     .field
       Price
     .value
       =@product.price
 
-  .attribute
+  .attribute#description
     .field
       Description
     .value
       =@product.description
 
-  .attribute
+  .attribute#image
     .field
       Image
     .value
       %img{:src => @product.image}
   %h2 Associated Options
-  -@product.options.each do |option|
-    .attribute
-      .field
-        Option
-      .value
-        = option.family + '  :  ' + option.value
-
-
+  .field#optionField
+    - product_options = @product.options 
+    - families = product_options.collect(&:family).uniq.sort
+    - families.each do |family|
+      .family{:id => family}
+        %h3
+          = family.capitalize
+        - family_options = product_options.collect { |i| i if i.family == family }.compact
+        = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })
   .link
     %a{:href => edit_product_path(@product)} Edit Product
