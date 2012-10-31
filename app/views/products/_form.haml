@@ -55,15 +55,16 @@
       dataType: 'json',
       data: myData,
       success: function(response, textStatus, jqXHR) {
-        console.log(textStatus);
         if (response.message){
           alert(response.message);
         }
         else {  
           var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
-          var familySelect = "#" + response.family.toLowerCase() ;
+          var familySelect = "#" + response.family.toLowerCase();
+          var familyName = response.family;
+          familyName[0] = familyName[0].toUpperCase();
           if ($(familySelect).length === 0) {
-            $('#optionField').append('<div class="family" id="' + response.family.toLowerCase() + '"><h3>' + response.family + '</h3></div>');
+            $('#optionField').append('<div class="family" id="' + response.family.toLowerCase() + '"><h3 style="text-transform:capitalize;">' + response.family.toLowerCase() + '</h3></div>');
           }
           $(familySelect).append(toAppend);
         }
