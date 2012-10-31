@@ -111,4 +111,10 @@ describe "searching for a product by name" do
 
   end
 
+  describe "with no results" do
+    it "redirects to the index page and displays a flash notice" do
+      pending
+    end
+  end
+
 end

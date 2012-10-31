@@ -24,7 +24,7 @@
     - families = allOptions[0]
     - families.each do |family|
       .family{:id => family}
-        %h3 
+        %h3
           = family.capitalize
         - family_options = allOptions[1].collect { |i| i if i.family == family }.compact
         - family_options.each do |option|
@@ -43,7 +43,7 @@
   = label_tag(:value, "Value:")
   = text_field_tag(:value)
 
-%a.btn#optSubmit{:onClick => "newOption()" }
+%a.btn#optSubmit{:href => '#', :onClick => "newOption()" }
   Create!
 
 :javascript
@@ -58,7 +58,7 @@
         if (response.message){
           alert(response.message);
         }
-        else {  
+        else {
           var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
           var familySelect = "#" + response.family.toLowerCase();
           var familyName = response.family;

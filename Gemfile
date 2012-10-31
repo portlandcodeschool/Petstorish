@@ -27,6 +27,8 @@ gem 'rails_admin'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "capybara"
+  gem 'factory_girl_rails'
+  gem 'launchy'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -47,4 +49,3 @@ gem 'haml-rails'
 gem 'paperclip'
 gem 'kaminari'
 gem 'random-word'
-gem 'factory_girl_rails'
