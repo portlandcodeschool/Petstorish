@@ -65,29 +65,31 @@ describe OptionsController do
     describe "with valid params" do
 
       before(:each) do
-        @option = mock_model(Option)
+        @option = mock_model(Option, {:value => "green", :family => "flavor"})
         @option.stub(:update_attributes).and_return(true)
         @option.stub(:save).and_return(true)
+        @option.stub(:value=)
+        @option.stub(:family=)
         Option.stub(:new).and_return(@option)
        end
 
       it "creates a new Option" do
         Option.should_receive(:new).and_return(@option)
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
       end
 
       it "saves the new Option" do
         @option.should_receive(:save).and_return(@option)
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
       end
 
       it "assigns a newly created option as @option" do
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
         assigns(:option).should eq @option
       end
 
       it "redirects to the created option" do
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
         response.should redirect_to(@option)
       end
     end #describe "with valid...
@@ -97,18 +99,20 @@ describe OptionsController do
       before(:each) do
         @option = mock_model(Option)
         @option.stub(:update_attributes).and_return(false)
+        @option.stub(:value=)
+        @option.stub(:family=)
         @option.stub(:save).and_return(false)
         Option.stub(:new).and_return(@option)
        end
 
       it "assigns a newly created but unsaved option as @option" do
         @option.should_receive(:save)
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
         assigns(:option).should eq @option
       end
 
       it "re-renders the 'new' template" do
-        post :create
+        post :create, :option => { :family => "color", :value => "green" }
         response.should render_template('options/new')
       end
     end #describe "with invalid...

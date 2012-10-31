@@ -25,14 +25,17 @@ class OptionsController < ApplicationController
     respond_to do |format| # for ajax call in Product edit page
       format.json { 
         @option = Option.new
-        @option.value = params[:value]
-        @option.family = params[:family] 
+        @option.value = params[:value].downcase
+        @option.family = params[:family].downcase 
         @option.save
         render :json => @option
       }
     
       format.html {
-        @option = Option.new(params[:option])
+        @option = Option.new
+        @option.value = params[:option][:value].downcase
+        @option.family = params[:option][:family].downcase 
+        @option.save
         if @option.save
           redirect_to @option, notice: "Option was successfully created."
         else

@@ -20,10 +20,17 @@
     = f.select(:category, Product.categories)
 
   .field#optionField
-    - Option.all.each do |option|
-      %p
-        = check_box_tag 'options[]', option.id, @product.options.include?(option)
-        = option.value
+    - allOptions = Option.optionData
+    - families = allOptions[0]
+    - families.each do |family|
+      .family{:id => family}
+        %h3 
+          = family.capitalize
+        - family_options = allOptions[1].collect { |i| i if i.family == family }.compact
+        - family_options.each do |option|
+          %p
+            = check_box_tag 'options[]', option.id, @product.options.include?(option)
+            = option.value
   .field
     = f.label :Image
     = f.file_field :image
@@ -49,7 +56,12 @@
       data: myData,
       success: function(response, textStatus, jqXHR) {
         var toAppend = '<p><input id="options_" name="options[]" type="checkbox" value="' + response.id + '" /> ' + response.value + '</p>';
-        $('#optionField').append(toAppend);
+        var familySelect = "#" + response.family.toLowerCase() ;
+        if ($(familySelect).length === 0) {
+          $('#optionField').append('<div class="family" id="' + response.family.toLowerCase() + '"><h3>' + response.family + '</h3></div>');
+        }
+        $(familySelect).append(toAppend);
+        
       },
       error: function(jqXHR, textStatus, errorThrown){
         alert('nuuuu!');
