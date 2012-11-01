@@ -69,7 +69,7 @@
       .input-overlay
         %h2 Search
         .search
-          =form_tag("/s/", :method => "post") do
+          =form_tag("/s/", :method => "get") do
 
             = text_field_tag :query
 
@@ -91,7 +91,9 @@
               .price
                 maximum
                 %p= select('price', 'maximum', (0..100).step(10), :selected => 100)
-
+              .price
+                category
+                %p= select('category', 'name', ['all'] | Product.categories, :selected => 'all') 
               .button
                 =submit_tag("search", :id => 'OverlaySearchButton')
             .close
