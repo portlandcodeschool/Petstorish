@@ -11,7 +11,9 @@ Petstorish::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  resources :carts
 
+  resources :line_items
 
   resources :products
 
