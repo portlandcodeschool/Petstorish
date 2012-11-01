@@ -1,5 +1,17 @@
 class ProductsController < ApplicationController
 
+  before_filter :require_admin
+  skip_before_filter :require_admin, :except => [:new, :create, :edit, :update]
+
+  def require_admin
+    if current_user != nil
+      redirect_to products_path unless current_user.admin?
+    else
+      redirect_to products_path
+    end
+  end 
+
+
   def list
     @products = Product.where(:category => params[:category])
     #@products = Product.order(:id).page params[:page]

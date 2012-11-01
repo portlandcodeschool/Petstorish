@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe ProductsController do
   let(:products) { [mock("product1"), mock("product2")] }
   let(:product) { mock_model(Product)}
@@ -71,6 +72,9 @@ describe ProductsController do
     before(:each) do
       Product.stub(:new).and_return(product)
       product.stub(:save).and_return("tubular")
+      @user = mock(User, :admin => true)
+      @user.stub(:admin?).and_return(true)
+      controller.stub(:current_user).and_return @user
     end
 
     context "successful save" do
