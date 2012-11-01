@@ -39,25 +39,34 @@ class ProductsController < ApplicationController
       end
     end
 
+    name_query = 'S+-=!'
+    params[:query].split.each do |word|
+      name_query += "AND (name LIKE '%" + word + "%') "
+    end
+ 
+    name_query.sub!('S+-=!AND', '')
+    des_query = name_query.gsub('name', 'description')
+
+    puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    puts 'name_query: ' + name_query
+    puts 'des_query: ' + des_query
+
     if name and description
       @products = Product.where([
-                          '((name LIKE :query) OR ' +
-                          '(description LIKE :query)) AND ' +
+                          '((' + name_query + ') OR (' + des_query + ')) AND '+
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 
-                          :query => "%#{params[:query]}%",
                           :minimum => params[:price][:minimum],
                           :maximum => params[:price][:maximum]
       ])
 
     elsif name and !description
       @products = Product.where([
-                          '(name LIKE :query) AND ' +
+                          '('+name_query+') AND ' +
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 
-                          :query => "%#{params[:query]}%",
                           :minimum => params[:price][:minimum],
                           :maximum => params[:price][:maximum]
       ])
@@ -65,11 +74,10 @@ class ProductsController < ApplicationController
 
     elsif !name and description
       @products = Product.where([
-                          '(description LIKE :query) AND ' +
+                          '(' + des_query + ') AND ' +
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 
-                          :query => "%#{params[:query]}%",
                           :minimum => params[:price][:minimum],
                           :maximum => params[:price][:maximum]
       ])
@@ -77,6 +85,7 @@ class ProductsController < ApplicationController
 
     else #!name and !description
       @products = Product.where([
+
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 

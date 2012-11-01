@@ -63,7 +63,7 @@
             });
 
             opacityTimer = setInterval(fadeIn, 2);
-        } 
+        }
 
       .overlay
       .input-overlay
@@ -97,7 +97,7 @@
             .close
               %a{:href=>'#', :onClick => "hideOverlay();"} close
       //////////////////////////////////////////////////////////
-      //  HEADER 
+      //  HEADER
       /////////////////////////////////////////////////////////
 
     .container
@@ -109,9 +109,9 @@
             .right
               .cart
                 %a{:href => '#'} Shopping Cart
-              .search
+              .basic-search
                 =form_tag("/s/", :method => "get") do
-                  =text_field_tag(:query)
+                  =text_field_tag(:query, nil, :class => "simple-search")
                 .options
                   .link
                     %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
@@ -133,7 +133,7 @@
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();
-      window.location = "/s/"+$("#query").val();
-      }); 
+      window.location = "/s/"+$(".simple-search").val();
+      });
 
 
