@@ -9,7 +9,10 @@ describe "Adding a new family of options to a new product" do
       visit '/products/new'
         fill_in 'family', :with => 'texture'
         fill_in 'value', :with => 'slimy'
-        click_link('optSubmit')
+        # find doesn't need the a to have an href. href = "#" makes the page go to
+        # the top instead of staying where it is, which defeats the point of
+        # using ajax.
+        find('#optSubmit').click
         page.should have_content('Texture')
     end
 
@@ -30,7 +33,7 @@ describe "Adding a new family of options to a new product" do
         visit '/products/new'
         fill_in 'family', :with => 'texture'
         fill_in 'value', :with => 'slimy'
-        click_link('optSubmit')
+        find('#optSubmit').click 
         page.driver.browser.switch_to.alert.text.should have_content('Value already exists')
         page.driver.browser.switch_to.alert.accept
       end

@@ -1,6 +1,9 @@
 - @products.each do |product|
 
   .product-listing
+    .picture
+      - if product.image?
+        = image_tag product.image.url(:thumbnail)
     .price
       = product.price
       %span.name
