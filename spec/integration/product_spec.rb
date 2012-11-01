@@ -1,6 +1,14 @@
 require 'capybara/rspec'
 require 'spec_helper'
 
+
+def log_in_admin
+ visit '/admin'
+ fill_in 'Email', :with => 'testuser@test.com'
+ fill_in 'Password', :with => '000000009'
+ click_button('Sign in')
+end
+
 describe "viewing a product" do
   it "displays various fields" do
     visit '/products/1'
@@ -12,7 +20,9 @@ describe "viewing a product" do
 end
 
 describe "Adding a product" do
-
+  before(:each) do
+    log_in_admin
+  end
   context "happy path" do
 
     it "fills in all product details" do
@@ -46,6 +56,9 @@ describe "Adding a product" do
 end
 
 describe "edit a product" do
+  before(:each) do 
+    log_in_admin
+  end
   context "rosy path" do
     it "makes some edits" do
       visit '/products/1/edit'

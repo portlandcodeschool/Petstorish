@@ -11,7 +11,8 @@ class ProductsController < ApplicationController
     end
   end
 
-
+  def home
+  end
   def list
     @products = Product.where(:category => params[:category])
     #@products = Product.order(:id).page params[:page]
