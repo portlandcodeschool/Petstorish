@@ -4,10 +4,10 @@ require 'spec_helper'
 describe "viewing a product" do
   it "displays various fields" do
     visit '/products/1'
-    page.should have_css('div.attribute#product')
-    page.should have_css('div.attribute#category')
-    page.should have_css('div.attribute#price')
-    page.should have_css('div.attribute#description')
+      page.should have_css('div.attribute#product')
+      page.should have_css('div.attribute#category')
+      page.should have_css('div.attribute#price')
+      page.should have_css('div.attribute#description')
   end
 end
 
@@ -118,20 +118,30 @@ describe "searching for a product by name" do
 
   describe "with results" do
 
-    it "displays results" do
+    it "displays results", :js => true do
       visit '/'
-      fill_in 'query', :with => 'Steve'
-      click_button 'search'
-      current_path.should == '/s/'
+      within '.basic-search' do
+        fill_in 'query', :with => 'Steve'
+        click_button 'SearchButton'
+      end
+      current_path.should == '/s/Steve'
       page.should have_content "Wonder"
     end
 
   end
 
   describe "with no results" do
-    it "redirects to the index page and displays a flash notice" do
-      pending
+
+    it "redirects to the index page and displays a flash notice", :js => true do
+      visit '/'
+      within '.basic-search' do
+        fill_in 'query', :with => 'zxcvqwbk'
+        click_button 'SearchButton'
+      end
+      current_path.should == '/'
+      page.should have_css 'div.notice'
     end
+
   end
 
 end

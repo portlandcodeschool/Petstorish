@@ -63,7 +63,7 @@
             });
 
             opacityTimer = setInterval(fadeIn, 2);
-        } 
+        }
 
       .overlay
       .input-overlay
@@ -97,7 +97,7 @@
             .close
               %a{:href=>'#', :onClick => "hideOverlay();"} close
       //////////////////////////////////////////////////////////
-      //  HEADER 
+      //  HEADER
       /////////////////////////////////////////////////////////
 
     .container
@@ -109,7 +109,7 @@
             .right
               .cart
                 %a{:href => '#'} Shopping Cart
-              .search
+              .basic-search
                 =form_tag("/s/", :method => "get") do
                   =text_field_tag(:query)
                 .options
@@ -134,6 +134,6 @@
     $("#SearchButton").click(function(event) {
       event.preventDefault();
       window.location = "/s/"+$("#query").val();
-      }); 
+      });
 
 
