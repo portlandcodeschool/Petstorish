@@ -268,48 +268,12 @@ describe ProductsController do
 
   describe "using advanced search" do
 
-    context "it should set name and description flags accordingly" do
-
-      before(:each) do
-        @products = [mock_model(Product)]
-        Product.stub(:where).and_return(@products)
-        @products.stub(:page)
-        stub(:name=)
-        stub(:description=)
-      end
-
-      it "without name, without description" do
-        post :adv_search, :query => 's', :options => [], :price => {:minimum => 0, :maximum => 100}
-        assigns(:name).should eq false
-        assigns(:description).should eq false
-      end
-
-      it "with name, without description" do
-        post :adv_search, :query => 's', :options =>[:name], :price => {:minimum => 0, :maximum => 100}
-        assigns(:name).should eq false
-        assigns(:description).should eq true
-      end
-
-      it "without name, with description" do
-        post :adv_search, :query => 's', :options =>[:description], :price => {:minimum => 0, :maximum => 100}
-        assigns(:name).should eq false
-        assigns(:description).should eq true
-      end
-
-      it "with name, with description" do
-        post :adv_search, :query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}
-        assigns[:name].should eq true
-        assigns(:description).should eq true 
-      end
-
-    end
-
     context "with results" do
 
       before(:each) do
         @products = [mock_model(Product)]
         Product.stub(:where).and_return(@products)
-        @products.stub(:page)
+        @products.stub(:page).and_return(@products)
         @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}}
       end
 

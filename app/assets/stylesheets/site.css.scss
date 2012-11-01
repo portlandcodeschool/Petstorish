@@ -44,12 +44,20 @@ a
     background-color: white;
     color: black;
 
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    
+    -moz-box-shadow: 3px 3px 4px #f00;
+    -webkit-box-shadow: 3px 3px 4px #f00;
+    box-shadow: 3px 3px 4px #f00;
+
     .price
     {
       font-size: 80%;
     }
     .close
     {
+      opacity: 1;
       text-align: right;
     }
   }
