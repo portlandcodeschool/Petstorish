@@ -1,10 +1,19 @@
 require 'capybara/rspec'
 require 'spec_helper'
 
+def log_in_admin
+ visit '/admin'
+ fill_in 'Email', :with => 'testuser@test.com'
+ fill_in 'Password', :with => '000000009'
+ click_button('Sign in')
+end
+
 describe "Adding a new family of options to a new product" do
 
   describe "happy path" do
-
+    before(:each) do
+      log_in_admin
+    end
     it "saves the new family of options and displays it on the page", :js => true do
       visit '/products/new'
         fill_in 'family', :with => 'texture'
@@ -22,7 +31,9 @@ describe "Adding a new family of options to a new product" do
   end
 
   describe "sad path" do
-
+    before(:each) do
+      log_in_admin
+    end
     context "the value already exists" do
 
       before(:all) do
