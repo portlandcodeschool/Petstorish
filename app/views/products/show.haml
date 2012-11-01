@@ -27,7 +27,7 @@
 
   %h3 Associated Options
   .field#optionField
-    - product_options = @product.options 
+    - product_options = @product.options
     - families = product_options.collect(&:family).uniq.sort
     - families.each do |family|
       .family{:id => family}
@@ -35,5 +35,11 @@
           = family.capitalize
         - family_options = product_options.collect { |i| i if i.family == family }.compact
         = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })
+
+  = form_for @line_item, :url => {:controller => "line_items", :action => "create", :product_id => @product.id}, :html => {:id => "cartForm"} do |f|
+    = f.label(:quantity, "Quantity:")
+    = f.text_field(:quantity)
+    = f.submit "Add to cart", :id => "cartButton"
+
   .link
     %a{:href => edit_product_path(@product)} Edit Product

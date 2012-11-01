@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     else
       redirect_to products_path
     end
-  end 
+  end
 
 
   def list
@@ -38,11 +38,11 @@ class ProductsController < ApplicationController
 
 
   def adv_search
-    # these represent checkbox 
+    # these represent checkbox
     # tick states.
     name = false
     description = false
-      
+
     if params[:options] != nil
       params[:options].each do |option|
         if option == 'name'
@@ -135,6 +135,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @line_item = LineItem.new
   end
 
   def new
