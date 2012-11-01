@@ -140,10 +140,15 @@
 
           = yield
 
+      .row
+        .span12
+          .footer
+            %p
+              There's a footer here!
+           
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();
       window.location = "/s/"+$(".simple-search").val();
       });
-
 
