@@ -11,8 +11,8 @@ User.create(
   password: 'rushrush',
   password_confirmation: 'rushrush',
   address: 'steve',
-  credit_card: 'steve'
-
+  credit_card: 'steve',
+  admin: true
 )
 
 User.create(
@@ -20,8 +20,8 @@ User.create(
   password: 'rushrush',
   password_confirmation: 'rushrush',
   address: 'steve',
-  credit_card: 'steve'
-
+  credit_card: 'steve',
+  admin: true
 )
 
 User.create(
@@ -29,7 +29,8 @@ User.create(
   password: 'rushrush',
   password_confirmation: 'rushrush',
   address: 'steve',
-  credit_card: 'steve'
+  credit_card: 'steve',
+  admin: true
 
 )
 Product.create(

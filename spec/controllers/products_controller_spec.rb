@@ -1,5 +1,14 @@
 require 'spec_helper'
 
+#module StubUsers 
+def stub_admin 
+  @user= mock(User)
+  @user.stub(:admin?).and_return(true)
+  controller.stub(:current_user).and_return(@user)
+end
+#end
+
+
 describe ProductsController do
   let(:products) { [mock("product1"), mock("product2")] }
   let(:product) { mock_model(Product)}
@@ -45,7 +54,9 @@ describe ProductsController do
   end #describe "GET products/:id"
 
   describe "GET new" do
-
+    before(:each) do
+      stub_admin
+    end
     it "should call the new method on Product" do
       Product.should_receive(:new).and_return(product)
       get :new
@@ -71,6 +82,9 @@ describe ProductsController do
     before(:each) do
       Product.stub(:new).and_return(product)
       product.stub(:save).and_return("tubular")
+      @user = mock(User, :admin => true)
+      @user.stub(:admin?).and_return(true)
+      controller.stub(:current_user).and_return @user
     end
 
     context "successful save" do
@@ -127,6 +141,7 @@ describe ProductsController do
     describe "with valid params" do
 
       before(:each) do
+        stub_admin
         @product = mock_model(Product).as_null_object
         Product.stub(:find).and_return(@product)
         @product.stub(:update_attributes).and_return(true)
@@ -150,8 +165,9 @@ describe ProductsController do
     end #describe "with valid...
 
     describe "with invalid params" do
-
+      #includes StubUsers
       before(:each) do
+        stub_admin
         @product = mock_model(Product).as_null_object
         Product.stub(:find).and_return(@product)
         @product.stub(:update_attributes).and_return(false)
@@ -274,7 +290,7 @@ describe ProductsController do
         @products = [mock_model(Product)]
         Product.stub(:where).and_return(@products)
         @products.stub(:page).and_return(@products)
-        @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}}
+        @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}, :category => {:name => 'all'} }
       end
 
       it "should search database" do
