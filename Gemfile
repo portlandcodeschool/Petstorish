@@ -26,7 +26,7 @@ gem 'devise'
 gem 'rails_admin'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
-  gem "capybara"
+  gem 'capybara', git: 'https://github.com/jnicklas/capybara', :ref => 'd153635e6546ecc742e2b805390bc42a1e863d7c'
   gem 'factory_girl_rails'
   gem 'launchy'
 end

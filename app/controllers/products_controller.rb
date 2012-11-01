@@ -31,29 +31,31 @@ class ProductsController < ApplicationController
     name = false
     description = false
      
-    params[:options].each do |option|
-      if option == 'name'
-        name = true
-      elsif option == 'description'
-        description = true
+    if params[:options] != nil
+      params[:options].each do |option|
+        if option == 'name'
+          name = true
+        elsif option == 'description'
+          description = true
+        end
       end
     end
 
-    name_query = 'S+-=!'
-    params[:query].split.each do |word|
-      name_query += "AND (name LIKE '%" + word + "%') "
+    if params[:query] == nil or params[:query] == ''
+      name = description = false
     end
- 
-    name_query.sub!('S+-=!AND', '')
-    des_query = name_query.gsub('name', 'description')
 
-    puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    puts 'name_query: ' + name_query
-    puts 'des_query: ' + des_query
+    args = []
+    params[:query].split.each do |word|
+      args << "(name LIKE '%" + word + "%')"
+    end
+    name_query = '( ' + args*' OR ' + ' )'
+
+    des_query = name_query.gsub('name', 'description')
 
     if name and description
       @products = Product.where([
-                          '((' + name_query + ') OR (' + des_query + ')) AND '+
+                          '(' + name_query + ' OR ' + des_query + ') AND '+
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 
@@ -63,7 +65,7 @@ class ProductsController < ApplicationController
 
     elsif name and !description
       @products = Product.where([
-                          '('+name_query+') AND ' +
+                          name_query + ' AND ' +
                           '(price > :minimum) AND ' +
                           '(price < :maximum)',
 

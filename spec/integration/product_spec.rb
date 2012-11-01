@@ -146,4 +146,47 @@ describe "searching for a product by name" do
 
 end
 
+describe "advanced search" do
 
+  it "by name, by description" do
+    visit '/'
+    click_link 'Advanced Search'
+    within '.search' do
+      fill_in 'query', :with => 'funzone crazypants'
+      click_button 'OverlaySearchButton'
+    end
+    current_path.should == '/s/'
+    page.should have_content 'funzone'
+  end
+  it "by name, not description" do
+    visit '/'
+    click_link 'Advanced Search'
+    within '.search' do
+      fill_in 'query', :with => 'funzone'
+      click_button 'OverlaySearchButton'
+    end
+    current_path.should == '/s/'
+    page.should have_content 'funzone'
+  end
+  it "not name, by description" do
+    visit '/'
+    click_link 'Advanced Search'
+    within '.search' do
+      fill_in 'query', :with => 'crazypants'
+
+      click_button 'OverlaySearchButton'
+    end
+    current_path.should == '/s/'
+    page.should have_content 'funzone'
+  end
+  it "not name, not description" do
+    visit '/'
+    click_link 'Advanced Search'
+    within '.search' do
+      page.select("10", :from => 'price_maximum')
+      click_button 'OverlaySearchButton'
+    end
+    current_path.should == '/s/'
+    page.should have_content 'funzone'
+  end
+end

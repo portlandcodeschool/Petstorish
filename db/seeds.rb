@@ -32,7 +32,12 @@ User.create(
   credit_card: 'steve'
 
 )
-
+Product.create(
+        name: 'This is the test name funzone',
+        description: 'This is the description crazypants',
+        price: 2,
+        category: 'misc'
+)
 Product.create(
         name: 'Steve E. Wonder',
         description: 'Life of Steve',
@@ -43,7 +48,7 @@ Product.categories.each do |cat|
   50.times do 
     Product.create(
       name: RandomWord.adjs.next + " " + RandomWord.nouns.next,
-      description: 'Description of Steve',
+      description: 'description text is so fun to write I having fun i having fun i having fun',
       price: 12.99,
       category: cat
     )
