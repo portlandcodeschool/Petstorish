@@ -1,18 +1,21 @@
 .product-show
   .attribute#product
-    .field
-      Product
     .value
-      =@product.name
+      %h1
+        =@product.name
 
+  .attribute#image
+    .value
+      - if @product.image?
+        = image_tag @product.image.url(:display)
   .attribute#category
     .field
-      Category
+      Category:
     .value
       =@product.category
   .attribute#price
     .field
-      Price
+      Price:
     .value
       =@product.price
 
@@ -22,18 +25,13 @@
     .value
       =@product.description
 
-  .attribute#image
-    .field
-      Image
-    .value
-      %img{:src => @product.image}
-  %h2 Associated Options
+  %h3 Associated Options
   .field#optionField
     - product_options = @product.options 
     - families = product_options.collect(&:family).uniq.sort
     - families.each do |family|
       .family{:id => family}
-        %h3
+        %h4
           = family.capitalize
         - family_options = product_options.collect { |i| i if i.family == family }.compact
         = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })

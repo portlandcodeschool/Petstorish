@@ -116,6 +116,8 @@ a
     {
       border-bottom: 1px solid #AAAAAA;
       color: #333333;
+      font-weight: bold;
+      font-size: 1.3em;
     }
 
     .value
@@ -128,7 +130,6 @@ a
   {
     margin-top:1em;
   }
-
 
 }
 .sidebar
@@ -179,15 +180,30 @@ a
   }
   .name
   {
+    font-size: 0.7em;
   }
   .links
   {
     clear:both;
     text-align:right;
   }
+  .picture 
+  {
+    float:left;
+  }
 }
 
+// IN THE FORM PARTIAL _form.rb in products views 
+.option-add 
+{
+ float: right;
+ position: relative;
+ top: -290px;
+}
 
+.actions
+{
+}
 
 
 
