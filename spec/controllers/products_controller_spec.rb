@@ -274,7 +274,7 @@ describe ProductsController do
         @products = [mock_model(Product)]
         Product.stub(:where).and_return(@products)
         @products.stub(:page).and_return(@products)
-        @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}}
+        @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}, :category => {:name => 'all'} }
       end
 
       it "should search database" do
