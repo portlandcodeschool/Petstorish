@@ -38,3 +38,9 @@ describe "adding a product to a cart" do
   end
 
 end
+
+describe "editing the cart" do
+
+
+
+end
