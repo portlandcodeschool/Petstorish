@@ -1,10 +1,4 @@
 = form_for @product do |f|
-  - if errors = flash[:errors]
-    #error_explanation
-      %h2= "#{pluralize(errors.count, "error")} prevented this product from being saved:"
-      %ul
-        - errors.each do |attribute, msg|
-          %li= "#{attribute} #{msg[0]}"
 
   .field
     = f.label :Name

@@ -1,14 +1,30 @@
 require 'capybara/rspec'
 require 'spec_helper'
 
-describe "adding the first product to a new cart" do
+describe "adding a product to a cart" do
 
   context "in a non-ajax style" do
 
-    it "displays the updated cart page" do
-      visit '/products/1'
-      find('#cartButton').click
-      current_path.should match (/^\/carts\/\d+$/)
+    context "happy path" do
+
+      it "displays the updated cart page" do
+        visit '/products/1'
+        fill_in 'Quantity:', :with => '2'
+        find('#cartButton').click
+        current_path.should match (/^\/carts\/\d+$/)
+      end
+
+    end
+
+    context "sad path" do
+
+      it "displays an error message on the product page" do
+        visit '/products/1'
+        find('#cartButton').click
+        current_path.should == '/products/1'
+        page.should have_content('error')
+      end
+
     end
 
   end
