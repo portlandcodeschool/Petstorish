@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
 
- 
+
   def edit
     @cart = current_cart
     if @cart.line_items.empty?

@@ -1,8 +1,41 @@
-%h2 Your cart
-.cart
-  - @cart.line_items.each do |line_item|
-    .line-item
-      .name
-        = line_item.product.name
-      .price
-        = line_item.product.price
+%table.cart
+  %caption Your cart
+  %thead
+    %tr
+      %td Item
+      %td Quantity
+      %td Options
+      %td Price
+      %td Total
+
+  %tbody
+    - @cart.line_items.each do |line_item|
+
+      - product = line_item.product         # TODO: put all this stuff
+      - product_options = product.options   # in the controller?
+      - families = product_options.collect(&:family).uniq.sort
+
+      %tr.line-item
+
+        %td.name= product.name
+
+        %td.quantity
+          = form_tag line_item_path(line_item), :method => :put, :id => "quantityUpdate" do
+            = text_field_tag(:quantity, line_item.quantity.to_s)
+            = submit_tag "update", :id => "quantityUpdateButton"
+
+        - if product_options.empty?
+          %td none
+        - else
+          - families.each do |family|
+            %td.family{:id => family}
+              %h4
+                = family.capitalize
+              - family_options = product_options.collect { |i| i if i.family == family }.compact
+              = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })
+
+
+        %td.price= product.price
+
+
+%a{:href => '#'} Checkout
