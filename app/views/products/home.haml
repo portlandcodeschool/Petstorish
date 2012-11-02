@@ -23,6 +23,7 @@
     for(i=1;i<5;i++)
     {
       $('#'+i).css('width', '170px');
+      $('#'+i).css('opacity', '1');
     }
   });
 
@@ -37,21 +38,32 @@
       $(".products-display").animate({ 
         left: "+=" + width + "px",
       }, 500 );
+
+      if(direction<0)
+      {
+        //right button
+        //scroll left
+        //left photo disappears
+        $('#'+leftPhoto).animate({opacity: '-=1'}, 500);
+        //right photo appears
+        console.log("calling : " + (leftPhoto+4) + " to appear.");
+        $('#'+(leftPhoto+4)).animate({opacity: '+=1', width: '+=170px'}, 500);
+
+      }
+      else if(direction>0)
+      {
+        //left button
+        //scroll right
+        console.log('scrolling right');
+        //leftPhoto appears
+        console.log('calling : ' + (leftPhoto-1) + ' to appear');
+        $('#'+(leftPhoto - 1)).animate({opacity: '+=1'}, 500);
+        //rightPhoto disappears
+        $('#'+(leftPhoto+3)).animate({opacity: '-=1', width: '-=170px'}, 500);
+
+      }
+
       leftPhoto -= direction;
 
-      for(i=1;i<13;i++)
-      {
-
-        if(!(leftPhoto <= i && i < leftPhoto + 4))
-        {
-          $('#'+i).animate({opacity: '-=1', width: '-=170px'}, 500);
-        }
-        else
-        {
-          $('#'+i).animate({opacity: '+=1', width: '+=170px'}, 500);
-
-        }
-      }
-   
     }
   }
