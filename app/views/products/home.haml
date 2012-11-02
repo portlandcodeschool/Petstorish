@@ -1,6 +1,12 @@
 %h1
-  Pet Store EMPORIUM!!!!!
-
-%p
-  This is the home page.
+  Popular Products
+.products-display.row
+  -@products.each do |product|
+    .product.span3
+      .image
+        = image_tag product.image.url(:thumbnail)
+      .name
+        = product.name
+      .price
+        = product.price
 

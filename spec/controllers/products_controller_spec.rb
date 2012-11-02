@@ -312,8 +312,7 @@ describe ProductsController do
     end
 
     context "without results" do
-
-   
+      # TODO
     end
 
   end

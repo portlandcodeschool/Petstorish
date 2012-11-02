@@ -49,28 +49,36 @@ User.create(
   admin: true
 
 )
-Product.create(
+products = []
+products << Product.create(
         name: 'This is the test name funzone',
         description: 'This is the description crazypants',
         price: 2,
         category: 'misc'
 )
-Product.create(
+
+products << Product.create(
         name: 'Steve E. Wonder',
         description: 'Life of Steve',
         price: 2,
         category: 'misc'
 )
 Product.categories.each do |cat|
-  50.times do 
-    Product.create(
+  10.times do 
+    products << Product.create(
       name: RandomWord.adjs.next + " " + RandomWord.nouns.next,
       description: 'description text is so fun to write I having fun i having fun i having fun',
-      price: 12.99,
+      price: rand(100),
       category: cat
     )
   end
 end
+
+products.each do |p|
+  p.image = File.open('db/seed_images/'+rand(5).to_s + '.png')
+  p.save!
+end
+
 
 Option.create(family: 'color', value: 'blue')
 Option.create(family: 'color', value: 'yellow')
