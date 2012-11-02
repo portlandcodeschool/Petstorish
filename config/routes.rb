@@ -10,7 +10,7 @@ Petstorish::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  match '/cart' => 'cart#edit', :as => :cart
+  match '/cart' => 'carts#edit', :as => :cart
 
   resources :line_items
 

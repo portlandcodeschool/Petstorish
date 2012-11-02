@@ -1,1 +1,8 @@
-
+%h2 Your cart
+.cart
+  - @cart.line_items.each do |line_item|
+    .line-item
+      .name
+        = line_item.product.name
+      .price
+        = line_item.product.price

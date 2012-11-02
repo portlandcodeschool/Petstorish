@@ -8,7 +8,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: "The item was added to your cart, woohoo!" }
+        format.html { redirect_to cart_path, notice: "The item was added to your cart, woohoo!" }
       else
         format.html {
           flash[:errors] = @line_item.errors.messages
