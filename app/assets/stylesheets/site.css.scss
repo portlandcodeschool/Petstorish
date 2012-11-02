@@ -216,15 +216,16 @@ a
 ///////////////////////////////////////////////////////////
 //// HOMEPAGE
 //////////////////////////////////////////////////////////
-
+$width: 170px;
 .products-display
 {
-  width: 2040px;
+  width: $width * 12;
+  position: relative;
   .product
   {
-    width: 170px;  
+    position: relative;
+    width: 0px;
     text-align: center;
-    display: none;
     .photo
     {
     }
