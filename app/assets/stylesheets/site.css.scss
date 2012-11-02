@@ -219,9 +219,12 @@ a
 
 .products-display
 {
+  width: 2040px;
   .product
   {
+    width: 170px;  
     text-align: center;
+    display: none;
     .photo
     {
     }

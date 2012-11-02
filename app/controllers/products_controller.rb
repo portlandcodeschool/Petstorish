@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def home
     count = Product.count
     @products = []
-    3.times do
+    12.times do
       @products << Product.offset(rand(count)).first 
     end
   end

@@ -1,7 +1,7 @@
 Petstorish::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  root :to => 'products#home', :as => :home
+  root :to => 'products#home'
 
   resources :options
 
