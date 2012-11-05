@@ -13,42 +13,43 @@
 #OptionAssignment.delete_all()
 #Cart.delete_all()
 
+testuser = User.new
+testuser.email = 'testuser@test.com'
+testuser.password = '000000009'
+testuser.password_confirmation = '000000009'
+testuser.address = 'steve'
+testuser.credit_card = 'steve'
+testuser.admin = true
+testuser.save
 
-User.create(
-  email: 'testuser@test.com',
-  password: '000000009',
-  password_confirmation: '000000009',
-  address: 'steve',
-  credit_card: 'steve',
-  admin: true
-)
-User.create(
-  email: 'pkinnecom@elctech.com',
-  password: 'rushrush',
-  password_confirmation: 'rushrush',
-  address: 'steve',
-  credit_card: 'steve',
-  admin: true
-)
+pete = User.new
+pete.email = 'pkinnecom@elctech.com'
+pete.password = 'rushrush'
+pete.password_confirmation = 'rushrush'
+pete.address = 'steve'
+pete.credit_card = 'steve'
+pete.admin = true
+pete.save
 
-User.create(
-  email: 'mdanskey@elctech.com',
-  password: 'rushrush',
-  password_confirmation: 'rushrush',
-  address: 'steve',
-  credit_card: 'steve',
-  admin: true
-)
+matt = User.new  
+matt.email = 'mdanskey@elctech.com'
+matt.password = 'rushrush'
+matt.password_confirmation = 'rushrush'
+matt.address = 'steve'
+matt.credit_card = 'steve'
+matt.admin = true
+matt.save
 
-User.create(
-  email: 'rsakry@elctech.com',
-  password: 'rushrush',
-  password_confirmation: 'rushrush',
-  address: 'steve',
-  credit_card: 'steve',
-  admin: true
+rachel = User.new
 
-)
+rachel.email = 'rsakry@elctech.com'
+rachel.password = 'rushrush'
+rachel.password_confirmation = 'rushrush'
+rachel.address = 'steve'
+rachel.credit_card = 'steve'
+rachel.admin = true
+rachel.save
+
 products = []
 products << Product.create(
         name: 'This is the test name funzone',

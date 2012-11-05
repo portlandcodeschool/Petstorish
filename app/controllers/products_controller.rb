@@ -4,10 +4,12 @@ class ProductsController < ApplicationController
   skip_before_filter :require_admin, :except => [:new, :create, :edit, :update]
 
   def require_admin
-    if current_user != nil
+    if current_user.present?
       redirect_to products_path unless current_user.admin?
+      return false
     else
       redirect_to products_path
+      return false
     end
   end
 
