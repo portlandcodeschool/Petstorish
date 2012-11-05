@@ -69,7 +69,7 @@ Product.categories.each do |cat|
     products << Product.create(
       name: RandomWord.adjs.next + " " + RandomWord.nouns.next,
       description: 'description text is so fun to write I having fun i having fun i having fun',
-      price: rand(100),
+      price: rand(100) + 1,
       category: cat
     )
   end
