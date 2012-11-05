@@ -24,8 +24,10 @@
     {
       $('#'+i).css('width', '170px');
       $('#'+i).css('opacity', '1');
+      console.log('doc ready');
     }
   });
+
 
   var leftPhoto = 1;
   function scroll(direction)
@@ -35,19 +37,19 @@
     if(!(leftPhoto == 1 && direction > 0) && !(leftPhoto == 9 && direction <0))
     {
 
-      $(".products-display").animate({ 
-        left: "+=" + width + "px",
-      }, 500 );
+      //$(".products-display").animate({ 
+      //  left: "+=" + width + "px",
+      //}, 500 );
 
       if(direction<0)
       {
         //right button
         //scroll left
         //left photo disappears
-        $('#'+leftPhoto).animate({opacity: '-=1'}, 500);
+        $('#'+leftPhoto).animate({width: '-=170px', opacity: '0'}, 500);
         //right photo appears
         console.log("calling : " + (leftPhoto+4) + " to appear.");
-        $('#'+(leftPhoto+4)).animate({opacity: '+=1', width: '+=170px'}, 500);
+        $('#'+(leftPhoto+4)).animate({ width: '+=170px', opacity: '1'}, 500);
 
       }
       else if(direction>0)
@@ -57,9 +59,9 @@
         console.log('scrolling right');
         //leftPhoto appears
         console.log('calling : ' + (leftPhoto-1) + ' to appear');
-        $('#'+(leftPhoto - 1)).animate({opacity: '+=1'}, 500);
+        $('#'+(leftPhoto - 1)).animate({width: '+=170px', opacity: '1'}, 500);
         //rightPhoto disappears
-        $('#'+(leftPhoto+3)).animate({opacity: '-=1', width: '-=170px'}, 500);
+        $('#'+(leftPhoto+3)).animate({width: '-=170px', opacity: '0'}, 500);
 
       }
 
