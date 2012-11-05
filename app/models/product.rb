@@ -16,6 +16,7 @@ class Product < ActiveRecord::Base
     :numericality => { :greater_than => 0 },
     :format => { :with => /^(\d+)?\.?\d?\d?$/ }
 
+
   def self.categories
     %w[pets toys food hats garments misc]
   end
