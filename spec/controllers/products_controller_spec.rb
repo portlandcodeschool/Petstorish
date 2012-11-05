@@ -289,12 +289,14 @@ describe ProductsController do
       before(:each) do
         @products = [mock_model(Product)]
         Product.stub(:where).and_return(@products)
+        @products.stub(:where).and_return(@products)
         @products.stub(:page).and_return(@products)
         @pars = {:query => 's', :options =>[:name, :description], :price => {:minimum => 0, :maximum => 100}, :category => {:name => 'all'} }
       end
 
       it "should search database" do
         Product.should_receive(:where).and_return(@products)
+        
         post :adv_search, @pars
       end
 
