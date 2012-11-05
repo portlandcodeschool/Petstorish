@@ -114,11 +114,11 @@
               .basic-search
                 =form_tag("/s/", :method => "get") do
                   =text_field_tag(:query, nil, :class => "simple-search")
-                .options
-                  .link
-                    %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
-                  .button
-                    =submit_tag("search", :id => 'SearchButton')
+                  .options
+                    .link
+                      %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
+                    .button
+                      =submit_tag("search", :id => 'SearchButton')
       .row
         .span2.sidebar
           %ul
@@ -130,8 +130,8 @@
           - if flash[:notice]
             .notice
               %h2= flash[:notice]
-
-          - if errors = flash[:errors]
+          - errors = flash[:errors]
+          - if errors
             #error_explanation
               %h2= "#{pluralize(errors.count, "error")} prevented this action:"
               %ul
@@ -143,9 +143,15 @@
       .row
         .span12
           .footer
-            %p
-              There's a footer here!
-           
+            %ul
+              %li
+                contact
+              %li
+                address place <br />
+                123 wonderful lane <br />
+                Tropical Wisconsin <br />
+              %li
+                this is a site map
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();
