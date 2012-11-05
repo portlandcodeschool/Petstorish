@@ -12,6 +12,11 @@ class ProductsController < ApplicationController
   end
 
   def home
+    count = Product.count
+    @products = []
+    12.times do
+      @products << Product.offset(rand(count)).first 
+    end
   end
   def list
     @products = Product.where(:category => params[:category])
