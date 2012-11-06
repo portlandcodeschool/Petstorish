@@ -1,6 +1,72 @@
 %h1
-  Pet Store EMPORIUM!!!!!
+  Popular Products
+.products-display.row
+  - i = 0
+  -@products.each do |featured|
+    //%a{:href => product_path(product)}
+    %a.featured{:href => product_path(featured.id)}
+      .product.pull-left{:id => i += 1}
+        .image
+          = image_tag featured.image.url(:thumbnail)
+        .name
+          = featured.name
+        .price
+          = featured.price
+.rok
+  .left-button.pull-left
+    %a{:onClick => "scroll(1)", :class => "btn"} Left
+  .right-button.pull-right
+    %a{:onClick => "scroll(-1)", :class => "btn"} Right
 
-%p
-  This is the home page.
+:javascript
+  $(document).ready(function()
+  {
+    for(i=1;i<5;i++)
+    {
+      $('#'+i).css('width', '170px');
+      $('#'+i).css('opacity', '1');
+      console.log('doc ready');
+    }
+  });
 
+
+  var leftPhoto = 1;
+  function scroll(direction)
+  {
+    var width = $('#1').width() * direction;
+
+    if(!(leftPhoto == 1 && direction > 0) && !(leftPhoto == 9 && direction <0))
+    {
+
+      //$(".products-display").animate({ 
+      //  left: "+=" + width + "px",
+      //}, 500 );
+
+      if(direction<0)
+      {
+        //right button
+        //scroll left
+        //left photo disappears
+        $('#'+leftPhoto).animate({width: '-=170px', opacity: '0'}, 500);
+        //right photo appears
+        console.log("calling : " + (leftPhoto+4) + " to appear.");
+        $('#'+(leftPhoto+4)).animate({ width: '+=170px', opacity: '1'}, 500);
+
+      }
+      else if(direction>0)
+      {
+        //left button
+        //scroll right
+        console.log('scrolling right');
+        //leftPhoto appears
+        console.log('calling : ' + (leftPhoto-1) + ' to appear');
+        $('#'+(leftPhoto - 1)).animate({width: '+=170px', opacity: '1'}, 500);
+        //rightPhoto disappears
+        $('#'+(leftPhoto+3)).animate({width: '-=170px', opacity: '0'}, 500);
+
+      }
+
+      leftPhoto -= direction;
+
+    }
+  }
