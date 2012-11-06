@@ -20,16 +20,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'rb-fsevent'
-gem 'devise'
-gem 'rails_admin'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'capybara', git: 'https://github.com/jnicklas/capybara', :ref => 'd153635e6546ecc742e2b805390bc42a1e863d7c'
   gem 'factory_girl_rails'
-  gem 'launchy'
 end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -49,3 +45,7 @@ gem 'haml-rails'
 gem 'paperclip'
 gem 'kaminari'
 gem 'random-word'
+gem 'jquery-rails'
+gem 'rb-fsevent'
+gem 'devise'
+gem 'rails_admin'

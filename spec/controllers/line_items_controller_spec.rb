@@ -40,8 +40,7 @@ describe LineItemsController do
         LineItem.stub(:find).and_return(@line_item)
         @line_item.stub(:update_attributes).and_return(false)
         @params = {:id => @line_item.id, :cart_id => 11}
-        @steve.stub(:messages).and_return('hie')
-        @line_item.stub(:errors).and_return(@steve)
+        @line_item.stub_chain(:errors, :messages).and_return(["some error messages"])
       end
 
       it "displays a flash error" do
@@ -53,8 +52,8 @@ describe LineItemsController do
         post :update, @params
         response.should redirect_to(cart_path)
       end
- 
+
     end #describe "with invalid...
   end #POST update
-  
+
 end #file

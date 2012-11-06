@@ -5,7 +5,7 @@
       - if product.image?
         = image_tag product.image.url(:thumbnail)
     .price
-      = product.price
+      = number_to_currency(product.price)
       %span.name
         = product.name
     .links

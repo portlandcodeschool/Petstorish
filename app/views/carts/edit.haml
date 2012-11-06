@@ -35,7 +35,7 @@
               = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })
 
 
-        %td.price= product.price
+        %td.price= number_to_currency(product.price)
 
 
 %a{:href => '#'} Checkout
