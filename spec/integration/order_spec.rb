@@ -12,12 +12,8 @@ describe "user login to place an order" do
   it "redirects the user to a login page" do
     visit '/cart'
     page.should have_css 'table.cart'
-    puts "AAAAAAAAAAAAAAAAAA"
-    puts page.methods(false).sort
-    puts page.inspect
-    puts @cart.line_items.length
-    page.should have_css 'tr.line-item' # WHY DOESN'T THIS WORK?
-    find('#checkoutButton').click # To be implemented
+    page.should have_css 'tr.line-item'
+    find('#checkoutButton').click
 
   end
 

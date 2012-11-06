@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 #User.delete_all()
 #Product.delete_all()
 #Order.delete_all()
@@ -31,7 +32,7 @@ pete.credit_card = 'steve'
 pete.admin = true
 pete.save
 
-matt = User.new  
+matt = User.new
 matt.email = 'mdanskey@elctech.com'
 matt.password = 'rushrush'
 matt.password_confirmation = 'rushrush'
@@ -65,7 +66,7 @@ products << Product.create(
         category: 'misc'
 )
 Product.categories.each do |cat|
-  10.times do 
+  10.times do
     products << Product.create(
       name: RandomWord.adjs.next + " " + RandomWord.nouns.next,
       description: 'description text is so fun to write I having fun i having fun i having fun',
