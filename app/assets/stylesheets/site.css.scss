@@ -212,3 +212,31 @@ a
   color: $medium;
   text-align: center;
 }
+
+///////////////////////////////////////////////////////////
+//// HOMEPAGE
+//////////////////////////////////////////////////////////
+$width: 170px;
+.products-display
+{
+  width: $width * 12;
+  position: relative;
+  .product
+  {
+    position: relative;
+    width: 0px;
+    opacity: 0;
+    text-align: center;
+    .photo
+    {
+    }
+
+    .name
+    {
+    }
+
+    .price
+    {
+    }
+  }
+}

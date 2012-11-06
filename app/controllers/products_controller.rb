@@ -4,15 +4,23 @@ class ProductsController < ApplicationController
   skip_before_filter :require_admin, :except => [:new, :create, :edit, :update]
 
   def require_admin
-    if current_user != nil
+    if current_user.present?
       redirect_to products_path unless current_user.admin?
+      return false
     else
       redirect_to products_path
+      return false
     end
   end
 
   def home
+    count = Product.count
+    @products = []
+    12.times do
+      @products << Product.offset(rand(count)).first 
+    end
   end
+
   def list
     @products = Product.where(:category => params[:category])
     #@products = Product.order(:id).page params[:page]
@@ -39,12 +47,12 @@ class ProductsController < ApplicationController
 
 
   def adv_search
-    # these represent checkbox
-    # tick states.
-    name = false
-    description = false
 
-    if params[:options] != nil
+    
+    # These represent checkbox states
+    name = description = false
+
+    if !params[:options].nil?
       params[:options].each do |option|
         if option == 'name'
           name = true
@@ -54,75 +62,25 @@ class ProductsController < ApplicationController
       end
     end
 
-    if params[:query] == nil or params[:query] == ''
-      name = description = false
+
+    options = {
+             :name => name,
+             :description => description,
+             :category => params[:category][:name],
+             :price_minimum => params[:price][:minimum],
+             :price_maximum => params[:price][:maximum]
+              }
+
+    @products = Searcher.advanced(params[:query], options)
+
+    if @products.empty?
+      redirect_to :root, :notice => "Sorry. We don't 'seal' that here."
+      return
     end
 
-    args = []
-    params[:query].split.each do |word|
-      args << "(name LIKE '%" + word + "%')"
-    end
-    name_query = '( ' + args*' OR ' + ' )'
-
-    des_query = name_query.gsub('name', 'description')
-
-    if params[:category][:name] == 'all'
-      cat_query = ""
-    else
-      cat_query = " AND (category='#{params[:category][:name]}')"
-    end
-
-
-    if name and description
-      @products = Product.where([
-                          '(' + name_query + ' OR ' + des_query + ') AND '+
-                          '(price > :minimum) AND ' +
-                          '(price < :maximum)' +
-                          cat_query,
-
-                          :minimum => params[:price][:minimum],
-                          :maximum => params[:price][:maximum]
-      ])
-
-    elsif name and !description
-      @products = Product.where([
-                          name_query + ' AND ' +
-                          '(price > :minimum) AND ' +
-                          '(price < :maximum)' +
-                          cat_query,
-
-                          :minimum => params[:price][:minimum],
-                          :maximum => params[:price][:maximum]
-      ])
-
-
-    elsif !name and description
-      @products = Product.where([
-                          '(' + des_query + ') AND ' +
-                          '(price > :minimum) AND ' +
-                          '(price < :maximum)' +
-                          cat_query,
-
-                          :minimum => params[:price][:minimum],
-                          :maximum => params[:price][:maximum]
-      ])
-
-
-    else #!name and !description
-      @products = Product.where([
-
-                          '(price > :minimum) AND ' +
-                          '(price < :maximum)' +
-                          cat_query,
-
-                          :minimum => params[:price][:minimum],
-                          :maximum => params[:price][:maximum]
-      ])
-
-    end
-
-   @products = @products.page params[:page]
-   render 'index'
+    @products = @products.page params[:page]
+ 
+    render 'index'
 
   end
 
