@@ -32,6 +32,7 @@ class OptionsController < ApplicationController
           render :status => 201, :json => @option
         else
           render :status => 200, :json => @nope
+          #TODO
         end
       }
     

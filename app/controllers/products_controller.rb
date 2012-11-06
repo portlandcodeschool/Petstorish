@@ -109,20 +109,22 @@ class ProductsController < ApplicationController
     else
       flash[:errors] = @product.errors.messages
       redirect_to :action => "new"
+      #TODO
     end
   end
 
   def edit
     @product = Product.find(params[:id])
-    @option = Option.new
   end
 
   def update
-    @product = Product.find(params[:id])
-    OptionAssignment.destroy_all(:product_id => @product.id)
+    @product = Product.find(params[:id]).include(:options)
+    #OptionAssignment.destroy_all(:product_id => @product.id)
+    @product.options.destroy
     if params[:options]
       params[:options].each do |option|
-        OptionAssignment.create(:option_id => option, :product_id => @product.id)
+        #OptionAssignment.create(:option_id => option, :product_id => @product.id)
+        @product.options.create(option)
       end
     end
     if @product.update_attributes(params[:product])
@@ -130,7 +132,8 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:errors] = @product.errors.messages
-      render :action => :edit
+      # TODO
+      render :edit
     end
   end
 
