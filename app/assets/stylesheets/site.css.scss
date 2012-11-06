@@ -1,12 +1,12 @@
-$link:#ac70a4 ;
-$head:#76c5f0;
-$back:#FFFFFF;
+$orange:#f1b248;
+$blue:#76c5f0;
+$purple:#cba5ca;
 a
 {
-  color: $link;
+  color: $orange;
   &:hover
   {
-    color: $head;
+    color: $blue;
   }
 
 }
@@ -27,7 +27,7 @@ a
     top: 0px;
     width:100%;
     height:100%;
-    background-color: $head;
+    background-color: $blue;
     opacity: 0.5;
     z-index: 100;
   }
@@ -60,48 +60,54 @@ a
 }
 .container
 {
-  background-color: $back;
 }
-.header
+
+.header-border
 {
-  background-color: $head;
-  position: relative;
-  padding: 1em;
-  padding-top: 3em;
+  position:absolute;
+  z-index: -2;
+  top: 0;
+  .header
+  {
+    background-color: $blue;
+    position: relative;
+    padding: 1em;
+    padding-top: 3em;
 
-  .title
-  {
-    font-size: 300%;
-    font-weight: bold;
-    float: left;
-    line-height: 0em;
-    a
+    .title
     {
-      color: $link;
-    }
-  }
-  .right
-  {
-    float:right;
-    form
-    {
-      margin: 0em;
-    }
-    .search, .basic-search
-    {
-      .options
+      font-size: 300%;
+      font-weight: bold;
+      float: left;
+      line-height: 0em;
+      a
       {
-        text-align:right;
+        color: $orange;
+      }
+    }
 
-        .link
+    .right
+    {
+      float:right;
+      form
+      {
+        margin: 0em;
+      }
+      .search, .basic-search
+      {
+        .options
         {
-          float:left;
+          text-align:right;
+
+          .link
+          {
+            float:left;
+          }
         }
       }
     }
   }
 }
-
 .product-show
 {
   .attribute
@@ -131,7 +137,6 @@ a
 .sidebar
 {
   border-right: solid 1px black;
-  background: $back;
   padding-top: 4em;
   padding-bottom: 4em;
   padding-left: 0.2em;
@@ -165,7 +170,6 @@ a
 .product-listing
 {
   border: 1px solid black;
-  background-color: $back;
   margin-top: 1em;
   padding: 0.5em;
   .price
@@ -204,8 +208,6 @@ a
 //Footer
 .footer
 {
-  background-color: $back;
-  color: $head;
   text-align: center;
 }
 
