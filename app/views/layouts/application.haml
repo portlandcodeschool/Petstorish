@@ -93,7 +93,7 @@
                 %p= select('price', 'maximum', (0..100).step(10), :selected => 100)
               .price
                 category
-                %p= select('category', 'name', ['all'] | Product.categories, :selected => 'all') 
+                %p= select('category', 'name', ['all'] | Product.categories, :selected => 'all')
               .button
                 =submit_tag("search", :id => 'OverlaySearchButton')
             .close
@@ -108,7 +108,7 @@
           .header.clearfix
             /%img{:src => '/assets/design/top_border.png'}
             .title
-              =link_to 'Petstore', root_path 
+              =link_to 'Petstore', root_path
           .header-border
             .cat
             .right.pull-right
@@ -122,14 +122,14 @@
                       %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
                     .button
                       =submit_tag("search", :id => 'SearchButton')
-      .row.middle
-        .span2.sidebar
+      .middle.clearfix
+        .sidebar
           %ul
             -Product.categories.each do |cat|
               %li
                 =link_to cat, '/'+cat
 
-        .span9.main
+        .main
           - if flash[:notice]
             .notice
               %h2= flash[:notice]
