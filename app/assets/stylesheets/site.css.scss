@@ -1,15 +1,17 @@
-$link:#ac70a4 ;
-$head:#76c5f0;
-$back:#FFFFFF;
+$orange:#f1b248;
+$blue:#76c5f0;
+$purple:#cba5ca;
+
 a
 {
-  color: $link;
+  color: $orange;
   &:hover
   {
-    color: $head;
+    color: $blue;
   }
 
 }
+
 #overlay-container
 {
   display:none;
@@ -27,7 +29,7 @@ a
     top: 0px;
     width:100%;
     height:100%;
-    background-color: $head;
+    background-color: $blue;
     opacity: 0.5;
     z-index: 100;
   }
@@ -42,7 +44,7 @@ a
 
     -moz-border-radius: 25px;
     border-radius: 25px;
-    
+
     -moz-box-shadow: 3px 3px 4px #f00;
     -webkit-box-shadow: 3px 3px 4px #f00;
     box-shadow: 3px 3px 4px #f00;
@@ -58,37 +60,41 @@ a
     }
   }
 }
+
 .container
 {
-  background-color: $back;
 }
-.header
-{
-  background-color: $head;
-  position: relative;
-  padding: 1em;
-  padding-top: 3em;
 
-  .title
-  {
-    font-size: 300%;
-    font-weight: bold;
-    float: left;
-    line-height: 0em;
-    a
-    {
-      color: $link;
-    }
-  }
+.shorter-span
+{
+  height: 200px;
+}
+.header-border
+{
+  background-image: url('/assets/design/top_border.png');
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 200px;
+  top: -165px;
+  left: -10px;
+  position: relative;
+  //position:absolute;
+  z-index: 20;
+  //top: 0;
   .right
   {
-    float:right;
+    //float:right;
+    position: relative;
+    top: 40px;
+    left: -80px;
     form
     {
       margin: 0em;
     }
     .search, .basic-search
     {
+      //position: relative;
+      //z-index: 10;
       .options
       {
         text-align:right;
@@ -100,8 +106,53 @@ a
       }
     }
   }
+
+  .title
+  {
+    font-size: 900%;
+    font-weight: bold;
+    float: left;
+    line-height: 0em;
+    font-family:Impact, Charcoal, sans-serif;
+    position: relative;
+    top: 93px;
+    left: 38px;
+    a
+    {
+      color: black;
+      text-decoration:none;
+      &:hover
+      {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .cat
+  {
+    width:11%;
+    height:42%;
+    background-image: url('/assets/design/cat_sleep.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-size: 100%;
+    position: relative;
+    top: 87px;
+    left: 453px;
+    float:left;
+  }
 }
 
+.header
+{
+  background-color: $blue;
+  position: relative;
+  padding: 1em;
+  padding-top: 3em;
+  z-index: 1;
+  height: 105px;
+
+}
 .product-show
 {
   .attribute
@@ -130,12 +181,28 @@ a
 }
 .sidebar
 {
+  float: left;
+  width: 15%;
   border-right: solid 1px black;
-  background: $back;
   padding-top: 4em;
   padding-bottom: 4em;
   padding-left: 0.2em;
   padding-right: 1em;
+  position: relative;
+  margin-bottom: -200px;
+  .monkey
+  {
+    width:100%;
+    height:200px;
+    background-image: url('/assets/design/monkey.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+    top: -76px;
+    left: -119px;
+    float:left;
+    z-index:30;
+  }
 
   ul
   {
@@ -154,9 +221,72 @@ a
 }
 .main
 {
+  float: right;
+  width: 77%;
+  margin-bottom: -100px;
+  padding-bottom:2em;
   margin-left:0px;
   padding-left:2em;
+  padding-right: 2em;
+  padding-bottom: 170px;
+  margin-bottom: -301px;
+  background-image: url('/assets/design/marble.png');
 }
+.middle
+{
+  background-image: url('/assets/design/leopard.png');
+  margin-bottom: -100px;
+  margin-right: -2px;
+  margin-left: 7px;
+  padding-bottom: 170px;
+}
+.upfix
+{
+  position:relative;
+  top:-100px;
+}
+.padding
+{
+  padding-top:100px;
+}
+.margin
+{
+  margin-top:-100px;
+}
+//Footer
+.footer
+{
+  text-align: center;
+  background: $blue;
+  height: 158px;
+  padding-top: 40px;
+  margin-top: 70px;
+}
+.footer-border
+{
+  background-image: url('/assets/design/bottom_border.png');
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 215px;
+  top: -215px;
+  left: -20px;
+  position: relative;
+  //position:absolute;
+  z-index: 20;
+  .cat
+  {
+    width:18%;
+    height:67%;
+    background-image: url('/assets/design/cat_sleep.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-size: 100%;
+    position: relative;
+    float:left;
+    top: -95px;
+    left: 787px;
+  }
+} 
 .wide
 {
   width: 100%;
@@ -165,7 +295,6 @@ a
 .product-listing
 {
   border: 1px solid black;
-  background-color: $back;
   margin-top: 1em;
   padding: 0.5em;
   .price
@@ -183,14 +312,14 @@ a
     clear:both;
     text-align:right;
   }
-  .picture 
+  .picture
   {
     float:left;
   }
 }
 
-// IN THE FORM PARTIAL _form.rb in products views 
-.option-add 
+// IN THE FORM PARTIAL _form.rb in products views
+.option-add
 {
  float: right;
  position: relative;
@@ -201,13 +330,6 @@ a
 {
 }
 
-//Footer
-.footer
-{
-  background-color: $back;
-  color: $head;
-  text-align: center;
-}
 
 ///////////////////////////////////////////////////////////
 //// HOMEPAGE

@@ -12,7 +12,7 @@
           = featured.name
         .price
           = featured.price
-.rok
+.row
   .left-button.pull-left
     %a{:onClick => "scroll(1)", :class => "btn"} Left
   .right-button.pull-right
@@ -38,7 +38,7 @@
     if(!(leftPhoto == 1 && direction > 0) && !(leftPhoto == 9 && direction <0))
     {
 
-      //$(".products-display").animate({ 
+      //$(".products-display").animate({
       //  left: "+=" + width + "px",
       //}, 500 );
 
