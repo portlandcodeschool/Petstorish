@@ -3,7 +3,7 @@ class LineItemsController < ApplicationController
   def create
     @cart = current_cart # This method is defined in ApplicationController
     #@line_item = @cart.line_items.build(:product_id => params[:product_id], :quantity => params[:line_item][:quantity])
-    @cart.add_product(params[:product_id], params[:line_item][:quantity].to_i, params[:options])
+    @line_item = @cart.add_product(params[:product_id], params[:line_item][:quantity].to_i, params[:options])
 
     respond_to do |format|
       if @line_item.save
