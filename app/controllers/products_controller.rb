@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     count = Product.count
     @products = []
     12.times do
-      @products << Product.offset(rand(count)).first 
+      @products << Product.offset(rand(count)).first
     end
   end
 
@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
 
   def adv_search
 
-    
+
     # These represent checkbox states
     name = description = false
 
@@ -79,7 +79,7 @@ class ProductsController < ApplicationController
     end
 
     @products = @products.page params[:page]
- 
+
     render 'index'
 
   end
@@ -118,13 +118,11 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find(params[:id]).include(:options)
-    #OptionAssignment.destroy_all(:product_id => @product.id)
-    @product.options.destroy
+    @product = Product.find(params[:id])
+    OptionAssignment.destroy_all(:product_id => @product.id)
     if params[:options]
       params[:options].each do |option|
-        #OptionAssignment.create(:option_id => option, :product_id => @product.id)
-        @product.options.create(option)
+        OptionAssignment.create(:option_id => option, :product_id => @product.id)
       end
     end
     if @product.update_attributes(params[:product])
@@ -132,8 +130,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:errors] = @product.errors.messages
-      # TODO
-      render :edit
+      render :action => :edit
     end
   end
 
