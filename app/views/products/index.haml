@@ -1,6 +1,22 @@
+:javascript
+  globalMonkey = $('.monkey').offset().top;
+  globalMonkeyTarget = 0;
+  function monkeyBusiness (activeDivisionByZero) {
+    var goHere = activeDivisionByZero.offset();
+    console.log('looool!');
+    var placeGo = goHere.top - globalMonkey;
+    if (placeGo !== globalMonkeyTarget){
+      console.log(placeGo);
+      $('.monkey').stop();
+      $('.monkey').animate({
+        top: placeGo-70+"px"}, 920
+      );
+    }
+  //only change on event different thingy
+  }
 - @products.each do |product|
 
-  .product-listing
+  .product-listing{:onmouseover=> 'monkeyBusiness($(this));'}
     .picture
       - if product.image?
         = image_tag product.image.url(:thumbnail)
@@ -19,4 +35,3 @@
 %br
 
 = link_to 'New Product', new_product_path
-

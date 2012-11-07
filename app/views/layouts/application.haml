@@ -93,7 +93,7 @@
                 %p= select('price', 'maximum', (0..100).step(10), :selected => 100)
               .price
                 category
-                %p= select('category', 'name', ['all'] | Product.categories, :selected => 'all') 
+                %p= select('category', 'name', ['all'] | Product.categories, :selected => 'all')
               .button
                 =submit_tag("search", :id => 'OverlaySearchButton')
             .close
@@ -104,11 +104,14 @@
 
     .container
       .row
-        .span12
+        .span12.shorter-span
           .header.clearfix
+            /%img{:src => '/assets/design/top_border.png'}
+          .header-border
             .title
-              =link_to 'Petstore...ish', root_path 
-            .right
+              =link_to 'Petstore', root_path
+            .cat
+            .right.pull-right
               .cart
                 %a{:href => '#'} Shopping Cart
               .basic-search
@@ -119,14 +122,14 @@
                       %a{:href=>"#", :onClick => "showOverlay()"}Advanced Search
                     .button
                       =submit_tag("search", :id => 'SearchButton')
-      .row
-        .span2.sidebar
+      .middle.clearfix.padding.upfix
+        .sidebar
           %ul
             -Product.categories.each do |cat|
               %li
                 =link_to cat, '/'+cat
-
-        .span9.main
+          .monkey
+        .main.padding.upfix
           - if flash[:notice]
             .notice
               %h2= flash[:notice]
@@ -140,8 +143,8 @@
 
           = yield
 
-      .row
-        .span12
+      .row.margin.upfix
+        .span12.shorter-span
           .footer
             %ul
               %li
@@ -152,6 +155,9 @@
                 Tropical Wisconsin <br />
               %li
                 this is a site map
+          .footer-border
+            .cat
+
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();
