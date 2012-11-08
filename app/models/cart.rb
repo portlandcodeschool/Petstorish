@@ -17,7 +17,8 @@ class Cart < ActiveRecord::Base
       options1.sort!
 
       options2 = []
-      options_hash.each_value do |option_id|
+
+      (options_hash || {}).each_value do |option_id|
         options2 << option_id.to_i
       end
       options2.sort!
@@ -32,7 +33,7 @@ class Cart < ActiveRecord::Base
 
     current_item = line_items.build(:product_id => product_id, :quantity => quantity)
 
-    options_hash.each_value do |option_id|
+    (options_hash || {}).each_value do |option_id|
       current_item.selected_options.build(:option_id => option_id)
     end
 

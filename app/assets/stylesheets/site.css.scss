@@ -1,13 +1,28 @@
 $orange:#f1b248;
 $blue:#76c5f0;
-$purple:#cba5ca;
+$purple:#940790;
 
+#fish
+{
+  background-image:url('/assets/design/goldfish_right.png');
+  background-repeat: no-repeat;
+  width: 122px;
+  height: 94px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-transform: rotate(30deg);
+}
+body
+{
+}
 a
 {
-  color: $orange;
+  color: $purple;
   &:hover
   {
-    color: $blue;
+    color: $orange;
+    text-decoration: none;
   }
 
 }
@@ -87,6 +102,15 @@ a
     position: relative;
     top: 40px;
     left: -80px;
+    .cart
+    {
+      text-align:center;
+      font-weight: bold;
+      position: relative;
+      top: -20px;
+      margin-bottom: -20px;
+      font-size: 300%;      
+    }
     form
     {
       margin: 0em;
@@ -215,6 +239,11 @@ a
   a
   {
     font-size: 150%;
+    //background-color: $blue;
+    background: rgba(118, 197, 240, 0.9);
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 3px;
   }
 
 
@@ -261,6 +290,10 @@ a
   height: 158px;
   padding-top: 40px;
   margin-top: 70px;
+  ul
+  {
+    list-style-type: none;
+  }
 }
 .footer-border
 {
@@ -355,5 +388,49 @@ $width: 170px;
     .price
     {
     }
+  }
+}
+
+////////////////////////////////////////////////////////////
+////  CART VIEW
+////////////////////////////////////////////////////////////
+.important
+{
+  font-weight: bold;
+  font-size: 200%;
+  text-align:center;
+}
+.cart-table
+{
+  background-color: white;
+  text-align: center;
+  .label
+  {
+    background: none;
+    color: black;
+    font-weight: bold;
+    font-size: 240%;
+    line-height:1em;
+    text-align:center;
+  }
+  .input
+  {
+    width: 2em;
+  }
+  .name
+  {
+    font-weight:bold;
+
+    .option
+    {
+      font-weight: normal;
+    }
+  }
+
+  td
+  {
+    padding:1em;
+    border-top: 1px solid #DDDDDD; 
+    border-bottom: 1px solid #DDDDDD; 
   }
 }

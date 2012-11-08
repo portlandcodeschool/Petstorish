@@ -1,6 +1,6 @@
 class LineItem < ActiveRecord::Base
 
-  attr_accessible :cart_id, :product_id, :quantity, :selected_options
+  attr_accessible :cart_id, :product_id, :quantity, :options
 
 validates :quantity,
     :numericality => { :greater_than => 0 }
