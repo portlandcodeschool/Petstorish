@@ -18,7 +18,7 @@ class Product < ActiveRecord::Base
 
 
   def self.categories
-    %w[pets toys food hats garments misc]
+    %w[pets toys food hats duds misc]
   end
 
   private

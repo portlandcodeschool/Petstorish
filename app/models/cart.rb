@@ -5,20 +5,40 @@ class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
 
 
-  def add_product(product_id, line_item)
+  def add_product(product_id, quantity, options_hash)
 
-    current_item = line_items.find_by_product_id(product_id)
+    current_items = line_items.find_all_by_product_id(product_id)
 
-    if current_item
-      new_quantity = current_item.quantity + (line_item[:quantity]).to_i
-      current_item.update_attributes(:quantity => new_quantity)
-    else
-      current_item = line_items.build(line_item)
+    current_items.each do |current_item|
+      options1 = []
+      current_item.selected_options.each do |option|
+        options1 << option.option_id
+      end
+      options1.sort!
+
+      options2 = []
+
+      (options_hash || {}).each_value do |option_id|
+        options2 << option_id.to_i
+      end
+      options2.sort!
+
+      if options1 == options2
+        new_quantity = current_item.quantity + quantity
+        current_item.update_attributes(:quantity => new_quantity)
+        return current_item
+      end
+
+    end
+
+    current_item = line_items.build(:product_id => product_id, :quantity => quantity)
+
+    (options_hash || {}).each_value do |option_id|
+      current_item.selected_options.build(:option_id => option_id)
     end
 
     current_item
 
   end
-
 
 end

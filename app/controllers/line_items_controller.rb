@@ -2,9 +2,8 @@ class LineItemsController < ApplicationController
 
   def create
     @cart = current_cart # This method is defined in ApplicationController
-    product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id, params[:line_item])
-    @line_item.product = product
+    #@line_item = @cart.line_items.build(:product_id => params[:product_id], :quantity => params[:line_item][:quantity])
+    @line_item = @cart.add_product(params[:product_id], params[:line_item][:quantity].to_i, params[:options])
 
     respond_to do |format|
       if @line_item.save
@@ -12,7 +11,7 @@ class LineItemsController < ApplicationController
       else
         format.html {
           flash[:errors] = @line_item.errors.messages
-          redirect_to product }
+          redirect_to @line_item.product }
       end
     end
 

@@ -1,41 +1,47 @@
-%table.cart
-  %caption Your cart
+.important
+  %h1 Your cart
+
+%table.cart-table
   %thead
     %tr
-      %td Item
-      %td Quantity
-      %td Options
-      %td Price
-      %td Total
+      %td.label Item
+      %td.label Quantity
+      %td.label Price
+      %td.label Total
 
   %tbody
-    - @cart.line_items.each do |line_item|
-
-      - product = line_item.product         # TODO: put all this stuff
-      - product_options = product.options   # in the controller?
-      - families = product_options.collect(&:family).uniq.sort
-
+    - order_total = 0
+    - @cart.line_items.each do |item|
       %tr.line-item
 
-        %td.name= product.name
+        %td.name
+          = item.product.name
+          -item.selected_options.each do |sel_opt|
+            .option
+              =sel_opt.option.family + ' : '  
+              =sel_opt.option.value
 
         %td.quantity
-          = form_tag line_item_path(line_item), :method => :put, :id => "quantityUpdate" do
-            = text_field_tag(:quantity, line_item.quantity.to_s)
-            = submit_tag "update", :id => "quantityUpdateButton"
+          = form_for item, :id => "quantityUpdate" do |f|
+            = f.label :quantity
+            = f.text_field(:quantity, :class => 'input')
+            .button
+              = f.submit "update", :id => "quantityUpdateButton"
 
-        - if product_options.empty?
-          %td none
-        - else
-          - families.each do |family|
-            %td.family{:id => family}
-              %h4
-                = family.capitalize
-              - family_options = product_options.collect { |i| i if i.family == family }.compact
-              = select('option', 'value', family_options.collect{ |option| [option.value, option.id] })
+        %td.price= number_to_currency(item.product.price)
+        - product_total = item.product.price * item.quantity
+        - order_total += product_total
+        %td.product_total= number_to_currency(product_total)
 
+    %tr
+      %td
+      %td
+      %td TOTAL
+      %td.order_total= number_to_currency(order_total)
 
-        %td.price= number_to_currency(product.price)
-
-
-%a{:href => '#'} Checkout
+    %tr
+      %td
+      %td
+      %td 
+      %td.important
+        %a{:href => '#'} Checkout

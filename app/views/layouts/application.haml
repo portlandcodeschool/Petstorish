@@ -5,7 +5,8 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body
+  %body{:onload => 'goFish();'}
+    #fish
     ///////////////////////////////////////////////////////////
     //  SEARCH OVERLAY
     //////////////////////////////////////////////////////////
@@ -64,7 +65,58 @@
 
             opacityTimer = setInterval(fadeIn, 2);
         }
+        ///////////////////////////////
+        /// Fish animation
+        //////////////////////////////
+        var fish_x = [1, 0, 1, 0];
+        var fish_y = [0, 1, 1, 0];
+        var fish_target = 0;
+        var rotate = -1;
 
+        function goFish()
+        {
+          target_x = $('body').width() * fish_x[fish_target];
+
+          // the 122 is the width of the image
+          // nudge it so it doesn't go out of screen
+          if(target_x != 0)
+            target_x -= 122;
+
+          target_y = $('body').height() * fish_y[fish_target];
+          fish_target = (fish_target + 1)%4;
+          rotate = -rotate;
+          if(target_x == 0)
+            bg_image = 'goldfish_left.png';
+          else
+            bg_image = 'goldfish_right.png';
+          $('#fish').css('background-image', 'url("/assets/design/' + bg_image + '")');
+
+          // Left/Right movement
+          $('#fish').animate(
+          {
+            'left': target_x + 'px',
+            'top': target_y + 'px',
+            'rotate': '+='+2*Math.PI
+          },
+          {
+            step: function(now,fx) 
+            {
+            
+              if(fx.prop == 'rotate')
+              {
+                angle = 15*Math.sin(now);
+                $(this).css('-webkit-transform','rotate('+angle+'deg)');
+                console.log(now + ' prop: '+fx.prop);
+              }
+            },
+            duration: 5000,
+            complete: goFish
+
+          }
+          )
+
+          console.log('background-position: '+ target_x + 'px ' + target_y + 'px');
+        }
       .overlay
       .input-overlay
         %h2 Search
@@ -113,7 +165,9 @@
             .cat
             .right.pull-right
               .cart
-                %a{:href => '#'} Shopping Cart
+                %a{:href => '/cart'}
+                  Cart: 
+                  %img{:src => '/assets/design/cart.png'}
               .basic-search
                 =form_tag("/s/", :method => "get") do
                   =text_field_tag(:query, nil, :class => "simple-search")
@@ -163,4 +217,3 @@
       event.preventDefault();
       window.location = "/s/"+$(".simple-search").val();
       });
-
