@@ -78,12 +78,19 @@
             target_y = Math.round(Math.random() * $('body').height());
 
             if(target_x < fishDiv.offset().left)
-              bg_image = 'goldfish_left.png';
+            {
+              image_on = 'l'
+              image_off = 'r'
+            }
             else
-              bg_image = 'goldfish_right.png';
-
-            fishDiv.css('background-image', 'url("/assets/design/' + bg_image + '")');
-
+            {
+              image_on = 'r'
+              image_off = 'l'
+            }
+            //fishDiv.css('background-image', 'url("/assets/design/' + bg_image + '")');
+            //Change the z-index of the images here
+            $('#fish'+i+image_on).css('opacity', 1);
+            $('#fish'+i+image_off).css('opacity', 0);
             fishDiv.animate(
             {
               'left': target_x + 'px',
@@ -108,7 +115,7 @@
         }
         function addFish()
         {
-          $('body').append('<div class="fish'+numFish+'"></div>');
+          $('body').append('<div class="fish'+numFish+'"><img class = "fish-image" src="assets/design/goldfish_left.png" id="fish'+numFish+'l" style="opacity:0"><img class="fish-image" src="assets/design/goldfish_right.png" id="fish'+numFish+'r" style="opacity:0"></div>');
 
           start_x = Math.round(Math.random() * ($('body').width() - 122));
           start_y = Math.round(Math.random() * $('body').height());
@@ -219,7 +226,8 @@
           .footer-border
             .cat
     .fish0
-      %img{:src => '/assets/design/goldfish_right.png'}
+      %img{:src => '/assets/design/goldfish_right.png', :class => 'fish-image', :id => 'fish0r'}
+      %img{:src => '/assets/design/goldfish_left.png', :class => 'fish-image', :id  => 'fish0l'}
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();

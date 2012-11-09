@@ -41,4 +41,17 @@ class Cart < ActiveRecord::Base
 
   end
 
+  # Total price for the order
+  def total
+    sum = 0
+    self.line_items.each do |item|
+      sum += item.product.price * item.quantity
+    end
+    sum
+  end
+
+  def total_cents
+    (100 * self.total).to_i
+  end
+
 end

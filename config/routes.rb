@@ -11,12 +11,13 @@ Petstorish::Application.routes.draw do
   # first created -> highest priority.
 
   match '/cart' => 'carts#edit', :as => :cart
+  match '/cart/checkout' => 'carts#checkout', :as => :cart_checkout
+  match '/cart/receipt' => 'carts#receipt', :as => :cart_receipt
+  match '/orders' => 'orders#create', :via => 'post'
 
   resources :line_items
 
   resources :products
-
-  resources :orders
 
   resources :charges
 
