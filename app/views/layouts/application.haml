@@ -67,49 +67,62 @@
         ///////////////////////////////
         /// Fish animation
         //////////////////////////////
-        var fish_x = [1, 0, 1, 0];
-        var fish_y = [0, 1, 1, 0];
-        var fish_target = 0;
-
+        var numFish = 1;
         function goFish()
         {
-          target_x = $('body').width() * fish_x[fish_target];
-
-          // the 122 is the width of the image
-          // nudge it so it doesn't go out of screen
-          if(target_x != 0)
-            target_x -= 122;
-
-          target_y = $('body').height() * fish_y[fish_target];
-          fish_target = (fish_target + 1)%4;
-
-          if(target_x == 0)
-            bg_image = 'goldfish_left.png';
-          else
-            bg_image = 'goldfish_right.png';
-
-          $('#fish').css('background-image', 'url("/assets/design/' + bg_image + '")');
-
-          $('#fish').animate(
+          for(i=0;i<numFish;i++)
           {
-            'left': target_x + 'px',
-            'top': target_y + 'px',
-            'rotate': '+='+2*Math.PI
-          },
-          {
-            step: function(now,fx) 
+            var fishDiv = $('.fish'+i);
+            //122 is fish.png width
+            target_x = Math.round(Math.random() * ($('body').width() - 122));
+            target_y = Math.round(Math.random() * $('body').height());
+
+            if(target_x < fishDiv.offset().left)
+              bg_image = 'goldfish_left.png';
+            else
+              bg_image = 'goldfish_right.png';
+
+            fishDiv.css('background-image', 'url("/assets/design/' + bg_image + '")');
+
+            fishDiv.animate(
             {
-              if(fx.prop == 'rotate')
-              {
-                angle = 15 * Math.sin(10*now);
-                $(this).css('-webkit-transform','rotate('+angle+'deg)');
-              }
+              'left': target_x + 'px',
+              'top': target_y + 'px',
+              'rotate': '+='+2*Math.PI
             },
-            duration: 5000,
-            complete: goFish
+            {
+              step: function(now,fx)
+              {
+                if(fx.prop == 'rotate')
+                {
+                  angle = 15 * Math.sin(10*now);
+                  $(this).css('-webkit-transform','rotate('+angle+'deg)');
+                }
+              },
+              duration: Math.round(Math.random()*4000.0 + 1000),
+              complete: goFish
 
-          }
-          )
+            }
+            ); //animate
+          } // for(i=0)...
+        }
+        function addFish()
+        {
+          $('body').append('<div class="fish'+numFish+'"></div>');
+
+          start_x = Math.round(Math.random() * ($('body').width() - 122));
+          start_y = Math.round(Math.random() * $('body').height());
+
+
+          fish = $('.fish'+numFish);
+          fish.css('width', '122px');
+          fish.css('height', '94px');
+          fish.css('position', 'absolute');
+          fish.css('top', start_y);
+          fish.css('left', start_x);
+          fish.css('z-index', 100);
+
+          numFish++;
         }
       .overlay
       .input-overlay
@@ -160,7 +173,7 @@
             .right.pull-right
               .cart
                 %a{:href => '/cart'}
-                  Cart: 
+                  Cart:
                   %img{:src => '/assets/design/cart.png'}
               .basic-search
                 =form_tag("/s/", :method => "get") do
@@ -176,7 +189,7 @@
             -Product.categories.each do |cat|
               %li
                 =link_to cat, '/'+cat
-          .monkey
+          .monkey{:onclick => 'addFish();'}
         .main.padding.upfix
           - if flash[:notice]
             .notice
@@ -205,8 +218,8 @@
                 this is a site map
           .footer-border
             .cat
-    #fish
-
+    .fish0
+      %img{:src => '/assets/design/goldfish_right.png'}
   :javascript
     $("#SearchButton").click(function(event) {
       event.preventDefault();

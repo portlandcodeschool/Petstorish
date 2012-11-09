@@ -88,10 +88,6 @@ class ProductsController < ApplicationController
     @products = Product.order(:id).page params[:page]
   end
 
-#  def show
-#    @product = Product.find(params[:id])
-#  end
-
   def show
     @product = Product.find(params[:id])
     @line_item = LineItem.new

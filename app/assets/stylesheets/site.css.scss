@@ -1,11 +1,8 @@
 $orange:#f1b248;
 $blue:#76c5f0;
 $purple:#940790;
-
-#fish
+.fish0
 {
-  background-image:url('/assets/design/goldfish_right.png');
-  background-repeat: no-repeat;
   width: 122px;
   height: 94px;
   position: absolute;
@@ -110,7 +107,7 @@ a
       position: relative;
       top: -20px;
       margin-bottom: -20px;
-      font-size: 300%;      
+      font-size: 300%;
     }
     form
     {
@@ -320,7 +317,7 @@ a
     top: -95px;
     left: 787px;
   }
-} 
+}
 .wide
 {
   width: 100%;
@@ -431,7 +428,7 @@ $width: 170px;
   td
   {
     padding:1em;
-    border-top: 1px solid #DDDDDD; 
-    border-bottom: 1px solid #DDDDDD; 
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
   }
 }
