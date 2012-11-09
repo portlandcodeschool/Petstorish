@@ -44,4 +44,7 @@
       %td
       %td 
       %td.important
-        %a{:href => '#'} Checkout
+        //%a{:href => '#'} Checkout
+        = form_tag orders_path do 
+  
+          %script{:src => "https://button.stripe.com/v1/button.js", :class => "stripe-button", :'data-key' => Rails.configuration.stripe[:publishable_key], :amount => (order_total*100)}

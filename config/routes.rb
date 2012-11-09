@@ -18,6 +18,8 @@ Petstorish::Application.routes.draw do
 
   resources :orders
 
+  resources :charges
+
   match '/s/' => 'products#adv_search', :via => :get
   match '/s/:query' => 'products#search', :via => :get
   match '/:category' => 'products#list'
