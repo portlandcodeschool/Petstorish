@@ -1,3 +1,5 @@
+.important
+  %h1 Your cart
 %table.cart-table
   %thead
     %tr
@@ -44,10 +46,9 @@
       %td.important
         -if final
           = form_tag orders_path do
-            %script{:src => "https://button.stripe.com/v1/button.js", :class => "stripe-button", :'data-key' => Rails.configuration.stripe[:publishable_key], :amount => @cart.total_cents}
-
-
+            %script{:src => "https://button.stripe.com/v1/button.js", :class => "stripe-button", :'data-key' => Rails.configuration.stripe[:publishable_key], :'data-amount' => @cart.total_cents}
         -else
-          %a{:href => cart_checkout_path} Proceed to Checkout
-
-
+          -if @user.nil?
+            %a{:href  => '/users/sign_in'} Sign in
+          -else
+            %a{:href => cart_checkout_path} Proceed to Checkout

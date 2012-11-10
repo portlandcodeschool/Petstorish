@@ -192,10 +192,26 @@
                       =submit_tag("search", :id => 'SearchButton')
       .middle.clearfix.padding.upfix
         .sidebar
+          -if !user_signed_in?
+            .announce
+              You are not signed in.
+            %ul
+              %li
+                %a{:href => 'users/sign_in'} Sign in
+          -else
+            .announce
+              You are signed in.
+            %ul
+              %li
+                %a{:href => 'users/sign_out', :'data-method' => 'delete'} Signout
+
+          .announce
+            Categories
           %ul
             -Product.categories.each do |cat|
               %li
                 =link_to cat, '/'+cat
+
           .monkey{:onclick => 'addFish();'}
         .main.padding.upfix
           - if flash[:notice]

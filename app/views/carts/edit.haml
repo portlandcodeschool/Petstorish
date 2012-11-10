@@ -1,3 +1,2 @@
-.important
-  %h1 Your cart
-=render 'cart', :final => false
+-if !@cart.line_items.empty?
+  =render 'cart', :final => false
